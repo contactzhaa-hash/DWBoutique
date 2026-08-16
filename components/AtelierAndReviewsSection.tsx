@@ -4,6 +4,10 @@
 import React from 'react';
 import Image from 'next/image';
 
+interface Props {
+  onOpenBooking?: () => void;
+}
+
 const REVIEWS = [
   {
     quote:
@@ -37,7 +41,7 @@ const REVIEWS = [
   },
 ];
 
-export default function AtelierAndReviewsSection() {
+export default function AtelierAndReviewsSection({ onOpenBooking }: Props) {
   const googleMapsUrl = 'https://maps.app.goo.gl/GAXdKwVYCgKsqgki6';
 
   return (
@@ -91,6 +95,42 @@ export default function AtelierAndReviewsSection() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* ── EDITORIAL VIP FITTING CALL-TO-ACTION BANNER ── */}
+        <div className="relative bg-[#1A1A1A] text-white p-8 sm:p-12 md:p-16 overflow-hidden border border-neutral-800 shadow-xl">
+          <div className="relative z-10 max-w-3xl mx-auto text-center space-y-6">
+            <span className="text-[10px] uppercase tracking-[0.35em] text-[#C5A880]">
+              Private Showroom Experience // تجربة خاصة
+            </span>
+            <h3 className="font-serif text-2xl sm:text-4xl md:text-5xl font-light leading-tight">
+              Book a VIP Fitting Session
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed max-w-xl mx-auto">
+              Experience one-on-one bridal and couture consultations tailored to your silhouette with designer Arwa Alfallaj at our Buraydah atelier.
+            </p>
+            <p className="text-xs text-neutral-400 font-light dir-rtl">
+              احجزي جلستك الخاصة لتجربة فساتين الأعراس والسهرة مع المصممة أروى الفلاج في أتيليه بريدة.
+            </p>
+            
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={onOpenBooking}
+                className="w-full sm:w-auto px-8 py-4 bg-[#C5A880] text-black text-xs uppercase tracking-[0.25em] font-medium hover:bg-white transition-colors duration-300 shadow-md"
+              >
+                Reserve VIP Fitting (حجز موعد)
+              </button>
+              <a
+                href="https://wa.me/966535962115"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-8 py-4 border border-neutral-600 text-white text-xs uppercase tracking-[0.25em] hover:border-white transition-colors duration-300 text-center"
+              >
+                WhatsApp Concierge ↗
+              </a>
+            </div>
           </div>
         </div>
 
@@ -154,8 +194,6 @@ export default function AtelierAndReviewsSection() {
 
         {/* ── ATELIER GRAND FOOTER & SOCIAL LINKS ── */}
         <footer className="pt-12 border-t border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-          
-          {/* Centered Brand Identity */}
           <div className="flex flex-col items-center md:items-start gap-2">
             <div className="relative w-44 h-16">
               <Image
@@ -170,7 +208,6 @@ export default function AtelierAndReviewsSection() {
             </p>
           </div>
 
-          {/* Social Channels */}
           <div className="flex items-center gap-6 text-[11px] uppercase tracking-[0.2em] font-medium text-neutral-600">
             <a
               href="https://www.instagram.com/dw.boutique_"
@@ -198,7 +235,6 @@ export default function AtelierAndReviewsSection() {
             </a>
           </div>
 
-          {/* Direct Concierge Link */}
           <a
             href="https://wa.me/966535962115"
             target="_blank"
