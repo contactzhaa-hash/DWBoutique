@@ -19,44 +19,43 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 75,
-    damping: 22,
+    stiffness: 85,
+    damping: 24,
     restDelta: 0.001,
   });
 
   /* ── STAGE 1 [0.00 – 0.28]: Emerald & Atelier Velvet Chair ── */
   const stage1Opacity = useTransform(smoothProgress, [0, 0.20, 0.28], [1, 1, 0]);
-  const greenModelX = useTransform(smoothProgress, [0, 0.25], ['0%', '-16%']);
-  const greenModelScale = useTransform(smoothProgress, [0, 0.25], [1.05, 0.88]);
-  const chairX = useTransform(smoothProgress, [0, 0.25], ['0%', '16%']);
-  const chairScale = useTransform(smoothProgress, [0, 0.25], [1.05, 0.82]);
+  const greenModelX = useTransform(smoothProgress, [0, 0.24], ['0%', '-16%']);
+  const greenModelScale = useTransform(smoothProgress, [0, 0.24], [1.05, 0.88]);
+  const chairX = useTransform(smoothProgress, [0, 0.24], ['0%', '16%']);
+  const chairScale = useTransform(smoothProgress, [0, 0.24], [1.05, 0.82]);
   const heroHeadingOpacity = useTransform(smoothProgress, [0, 0.14], [1, 0]);
   const heroHeadingY = useTransform(smoothProgress, [0, 0.14], [0, -25]);
 
-  /* ── STAGE 2 [0.26 – 0.54]: Midnight Black Full Silhouette ── */
-  const stage2Opacity = useTransform(smoothProgress, [0.26, 0.34, 0.48, 0.54], [0, 1, 1, 0]);
-  const blackFullY = useTransform(smoothProgress, [0.26, 0.34], [35, 0]);
+  /* ── STAGE 2 [0.26 – 0.52]: Midnight Black Full Silhouette ── */
+  const stage2Opacity = useTransform(smoothProgress, [0.26, 0.33, 0.46, 0.52], [0, 1, 1, 0]);
+  const blackFullY = useTransform(smoothProgress, [0.26, 0.34], [30, 0]);
   const blackFullScale = useTransform(smoothProgress, [0.26, 0.34], [0.96, 1.04]);
 
-  /* ── STAGE 3 [0.52 – 0.78]: Bodice Detail & Animated Cloud Eye Mask ── */
-  const stage3Opacity = useTransform(smoothProgress, [0.52, 0.58, 0.72, 0.78], [0, 1, 1, 0]);
-  const blackLeftX = useTransform(smoothProgress, [0.52, 0.60], ['-15%', '0%']);
-  const blackLeftScale = useTransform(smoothProgress, [0.52, 0.60], [1, 0.82]);
-  const blackRightX = useTransform(smoothProgress, [0.52, 0.60], ['18%', '0%']);
-  const blackRightScale = useTransform(smoothProgress, [0.52, 0.60], [0.92, 1.05]);
+  /* ── STAGE 3 [0.50 – 0.74]: Bodice Detail & Floating Cloud ── */
+  const stage3Opacity = useTransform(smoothProgress, [0.50, 0.56, 0.68, 0.74], [0, 1, 1, 0]);
+  const blackLeftX = useTransform(smoothProgress, [0.50, 0.58], ['-15%', '0%']);
+  const blackLeftScale = useTransform(smoothProgress, [0.50, 0.58], [1, 0.82]);
+  const blackRightX = useTransform(smoothProgress, [0.50, 0.58], ['18%', '0%']);
+  const blackRightScale = useTransform(smoothProgress, [0.50, 0.58], [0.92, 1.05]);
 
-  /* ── STAGE 4 [0.76 – 1.00]: Sunburst Gold Atelier ── */
-  const stage4Opacity = useTransform(smoothProgress, [0.76, 0.82, 0.98, 1], [0, 1, 1, 0]);
-  const goldBackX = useTransform(smoothProgress, [0.76, 0.84], ['-18%', '0%']);
-  const goldFrontX = useTransform(smoothProgress, [0.76, 0.84], ['18%', '0%']);
+  /* ── STAGE 4 [0.72 – 1.00]: Sunburst Gold (Remains Active Until Section Ends) ── */
+  const stage4Opacity = useTransform(smoothProgress, [0.72, 0.79, 1.0], [0, 1, 1]);
+  const goldBackX = useTransform(smoothProgress, [0.72, 0.80], ['-18%', '0%']);
+  const goldFrontX = useTransform(smoothProgress, [0.72, 0.80], ['18%', '0%']);
 
   return (
-    <div ref={containerRef} dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative h-[400vh] bg-white text-[#1A1A1A]">
+    <div ref={containerRef} dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative h-[300vh] bg-white text-[#1A1A1A]">
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-between p-4 sm:p-6 md:p-12 z-10 select-none">
         
-        {/* ── CENTERED EDITORIAL HEADER ── */}
+        {/* ── HEADER ── */}
         <header className="w-full grid grid-cols-3 items-center z-50 pointer-events-auto">
-          {/* Left: Language Switcher */}
           <div className="flex items-center justify-start">
             <button
               type="button"
@@ -67,7 +66,6 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
             </button>
           </div>
 
-          {/* Center: Enlarged Brand Logo */}
           <div className="flex justify-center">
             <div className="relative w-32 h-14 sm:w-44 sm:h-16 md:w-56 md:h-20">
               <Image
@@ -80,7 +78,6 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
             </div>
           </div>
 
-          {/* Right: VIP Fitting CTA */}
           <div className="flex items-center justify-end">
             <button
               type="button"
@@ -175,9 +172,8 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </motion.div>
 
-        {/* ── STAGE 3: Bodice & Split Angle (Animated Cloud Eye Mask) ── */}
+        {/* ── STAGE 3: Bodice & Animated Floating Cloud Eye Mask ── */}
         <motion.div style={{ opacity: stage3Opacity }} className="absolute inset-0 pointer-events-none">
-          {/* Left Silhouette */}
           <motion.div
             style={{ x: blackLeftX, scale: blackLeftScale }}
             className="absolute left-0 sm:left-6 md:left-10 bottom-0 w-[42vw] sm:w-[34vw] md:w-[28vw] h-[82vh] md:h-[90vh] origin-bottom-left"
@@ -190,7 +186,6 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
             />
           </motion.div>
 
-          {/* Right Bodice Closeup with Animated Cloud Mask */}
           <motion.div
             style={{ x: blackRightX, scale: blackRightScale }}
             className="absolute right-0 sm:right-4 md:right-8 bottom-0 w-[62vw] sm:w-[52vw] md:w-[46vw] h-[88vh] md:h-[96vh] origin-bottom-right"
@@ -202,7 +197,6 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
               className="object-contain object-bottom"
             />
 
-            {/* Continuous Gentle Floating Mist Over Eyes & Forehead */}
             <motion.div
               animate={{
                 x: [-6, 6, -6],
