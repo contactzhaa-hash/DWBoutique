@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Sparkles } from 'lucide-react';
 
 export default function BookingModal() {
-  const { isBookingOpen, setIsBookingOpen, bookingPreselectedSku } = useShop();
+  const { isBookingOpen, setIsBookingOpen, bookingPreselectedSku, t } = useShop();
   const [step, setStep] = useState<1 | 2>(1);
   const [submitted, setSubmitted] = useState(false);
 
@@ -52,7 +52,7 @@ export default function BookingModal() {
         >
           <button
             onClick={() => setIsBookingOpen(false)}
-            className="absolute top-6 right-6 text-[#111111] hover:text-[#C5A059] p-1"
+            className="absolute top-6 right-6 rtl:right-auto rtl:left-6 text-[#111111] hover:text-[#C5A059] p-1"
           >
             <X size={20} />
           </button>
@@ -63,25 +63,25 @@ export default function BookingModal() {
                 <Check size={24} />
               </div>
               <h3 className="font-serif text-2xl text-[#111111]">
-                Fitting Reserved
+                {t('fittingReserved')}
               </h3>
               <p className="text-xs text-[#737373] max-w-sm mx-auto leading-relaxed">
-                Your private couture consultation request has been received. Our senior stylist will contact you via WhatsApp to finalize champagne and tailoring arrangements.
+                {t('fittingConfirmation')}
               </p>
             </div>
           ) : (
             <div>
               <div className="mb-8">
-                <span className="text-[10px] uppercase tracking-[0.35em] text-[#C5A059] flex items-center space-x-1 mb-1">
+                <span className="text-[10px] uppercase tracking-[0.35em] text-[#C5A059] flex items-center space-x-1 rtl:space-x-reverse mb-1">
                   <Sparkles size={12} />
-                  <span>VIP Experience</span>
+                  <span>{t('vipExperience')}</span>
                 </span>
                 <h3 className="font-serif text-2xl md:text-3xl text-[#111111] font-light">
-                  Reserve a Private Fitting
+                  {t('reserveFitting')}
                 </h3>
                 {bookingPreselectedSku && (
                   <p className="text-[11px] font-mono text-[#737373] mt-1">
-                    Pre-selected Silhouette: {bookingPreselectedSku}
+                    Silhouette SKU: {bookingPreselectedSku}
                   </p>
                 )}
               </div>
@@ -91,7 +91,7 @@ export default function BookingModal() {
                   <div className="space-y-4">
                     <div>
                       <label className="block text-[10px] uppercase tracking-[0.25em] text-[#737373] mb-2">
-                        Preferred Date
+                        {t('preferredDate')}
                       </label>
                       <input
                         type="date"
@@ -104,7 +104,7 @@ export default function BookingModal() {
 
                     <div>
                       <label className="block text-[10px] uppercase tracking-[0.25em] text-[#737373] mb-2">
-                        Private Time Slot
+                        {t('timeSlot')}
                       </label>
                       <select
                         value={formData.timeSlot}
@@ -114,43 +114,43 @@ export default function BookingModal() {
                         <option>11:00 AM - 12:30 PM</option>
                         <option>02:00 PM - 03:30 PM</option>
                         <option>05:00 PM - 06:30 PM</option>
-                        <option>08:00 PM - 09:30 PM (Evening Salon)</option>
+                        <option>08:00 PM - 09:30 PM</option>
                       </select>
                     </div>
 
                     <div>
                       <label className="block text-[10px] uppercase tracking-[0.25em] text-[#737373] mb-2">
-                        Accompanying Guests
+                        {t('guests')}
                       </label>
                       <select
                         value={formData.guests}
                         onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
                         className="w-full p-3 bg-transparent border border-black/[0.15] text-xs focus:border-[#C5A059] focus:outline-none"
                       >
-                        <option value="1">Just myself</option>
-                        <option value="2">2 Guests (+ Champagne service)</option>
-                        <option value="3">3 Guests (Private Salon suite)</option>
+                        <option value="1">{t('justMyself')}</option>
+                        <option value="2">{t('twoGuests')}</option>
+                        <option value="3">{t('threeGuests')}</option>
                       </select>
                     </div>
 
                     <button
                       type="button"
                       onClick={() => setStep(2)}
-                      className="w-full py-3.5 bg-[#111111] text-white text-xs uppercase tracking-[0.25em] font-medium hover:bg-[#C5A059] transition-colors mt-4 rounded-none"
+                      className="w-full py-3.5 bg-[#111111] text-white text-xs uppercase tracking-[0.25em] font-medium hover:bg-[#C5A059] transition-colors mt-4 rounded-none shadow-md"
                     >
-                      Continue to Details →
+                      {t('continueDetails')}
                     </button>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     <div>
                       <label className="block text-[10px] uppercase tracking-[0.25em] text-[#737373] mb-2">
-                        Full Name
+                        {t('fullName')}
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="Lady Eleanor Vance"
+                        placeholder="H.E. Princess Sarah"
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                         className="w-full p-3 bg-transparent border border-black/[0.15] text-xs focus:border-[#C5A059] focus:outline-none"
@@ -160,7 +160,7 @@ export default function BookingModal() {
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="block text-[10px] uppercase tracking-[0.25em] text-[#737373] mb-2">
-                          Email
+                          {t('email')}
                         </label>
                         <input
                           type="email"
@@ -173,7 +173,7 @@ export default function BookingModal() {
                       </div>
                       <div>
                         <label className="block text-[10px] uppercase tracking-[0.25em] text-[#737373] mb-2">
-                          Phone / WhatsApp
+                          {t('phone')}
                         </label>
                         <input
                           type="tel"
@@ -188,11 +188,11 @@ export default function BookingModal() {
 
                     <div>
                       <label className="block text-[10px] uppercase tracking-[0.25em] text-[#737373] mb-2">
-                        Special Requests &amp; Notes
+                        {t('specialRequests')}
                       </label>
                       <textarea
                         rows={3}
-                        placeholder="Specific event date, silhouette preferences, or tailoring requests..."
+                        placeholder={t('specialRequests')}
                         value={formData.notes}
                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                         className="w-full p-3 bg-transparent border border-black/[0.15] text-xs focus:border-[#C5A059] focus:outline-none"
@@ -205,13 +205,13 @@ export default function BookingModal() {
                         onClick={() => setStep(1)}
                         className="w-1/3 py-3.5 border border-black/[0.15] text-xs uppercase tracking-widest text-[#111111] hover:bg-black/[0.05]"
                       >
-                        Back
+                        {t('back')}
                       </button>
                       <button
                         type="submit"
-                        className="w-2/3 py-3.5 bg-[#111111] text-white text-xs uppercase tracking-[0.25em] font-medium hover:bg-[#C5A059] transition-colors rounded-none"
+                        className="w-2/3 py-3.5 bg-[#111111] text-white text-xs uppercase tracking-[0.25em] font-medium hover:bg-[#C5A059] transition-colors rounded-none shadow-md"
                       >
-                        Confirm Booking
+                        {t('confirmBooking')}
                       </button>
                     </div>
                   </div>

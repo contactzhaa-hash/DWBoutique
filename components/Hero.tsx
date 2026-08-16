@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useShop } from '@/context/ShopContext';
 
 export default function Hero() {
-  const { openBookingWithSku } = useShop();
+  const { openBookingWithSku, isRTL, t } = useShop();
 
   const transitionConfig = {
     duration: 1.1,
@@ -30,27 +30,29 @@ export default function Hero() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ ...transitionConfig, delay: 0.2 }}
-          className="text-[11px] uppercase tracking-[0.4em] text-[#C5A059] mb-4"
+          className="text-[11px] uppercase tracking-[0.4em] text-[#C5A059] mb-4 font-medium"
         >
-          Haute Couture &amp; Evening Atelier
+          {isRTL ? 'دار الهوت كوتور وفساتين السهرة الفاخرة' : 'Haute Couture & Evening Atelier'}
         </motion.span>
 
         <motion.h1
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ ...transitionConfig, delay: 0.35 }}
-          className="font-serif text-4xl sm:text-6xl md:text-7xl text-[#FBF9F5] font-light leading-[1.1] mb-8"
+          className="font-serif text-4xl sm:text-6xl md:text-7xl text-[#FBF9F5] font-light leading-[1.15] mb-8"
         >
-          Architectural Elegance in Motion
+          {isRTL ? 'فخامة وانسيابية تفيض بالأناقة' : 'Architectural Elegance in Motion'}
         </motion.h1>
 
         <motion.p
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ ...transitionConfig, delay: 0.5 }}
-          className="text-sm md:text-base text-[#FBF9F5]/70 max-w-lg font-light leading-relaxed mb-10"
+          className="text-sm md:text-base text-[#FBF9F5]/80 max-w-lg font-light leading-relaxed mb-10"
         >
-          Bespoke evening gowns and tailored silhouettes engineered with pure European silks and hand-sculpted contours.
+          {isRTL
+            ? 'فساتين سهرة ملكية وتصاميم مخصصة محاكة من أفخر أنواع الحرير الأوروبي ومصممة بأيدي كبار الحرفيين.'
+            : 'Bespoke evening gowns and tailored silhouettes engineered with pure European silks and hand-sculpted contours.'}
         </motion.p>
 
         <motion.div
@@ -61,15 +63,15 @@ export default function Hero() {
         >
           <a
             href="#collections"
-            className="w-full sm:w-auto px-8 py-3.5 bg-[#FBF9F5] text-[#111111] text-xs uppercase tracking-[0.25em] font-medium hover:bg-[#C5A059] hover:text-white transition-colors duration-300 rounded-none text-center"
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#FBF9F5] text-[#111111] text-xs uppercase tracking-[0.25em] font-medium hover:bg-[#C5A059] hover:text-white transition-colors duration-300 rounded-none text-center shadow-lg"
           >
-            View Runway Collection
+            {t('viewRunway')}
           </a>
           <button
             onClick={() => openBookingWithSku()}
-            className="w-full sm:w-auto px-8 py-3.5 border border-white/25 text-[#FBF9F5] text-xs uppercase tracking-[0.25em] font-medium hover:border-[#C5A059] hover:text-[#C5A059] transition-colors duration-300 rounded-none"
+            className="w-full sm:w-auto px-8 py-3.5 border border-white/30 text-[#FBF9F5] text-xs uppercase tracking-[0.25em] font-medium hover:border-[#C5A059] hover:text-[#C5A059] transition-colors duration-300 rounded-none"
           >
-            Book a Fitting
+            {t('bookFitting')}
           </button>
         </motion.div>
       </div>
