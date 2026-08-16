@@ -30,22 +30,22 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
   const greenModelScale = useTransform(smoothProgress, [0, 0.25], [1.05, 0.88]);
   const chairX = useTransform(smoothProgress, [0, 0.25], ['0%', '16%']);
   const chairScale = useTransform(smoothProgress, [0, 0.25], [1.05, 0.82]);
-  const heroHeadingOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
-  const heroHeadingY = useTransform(smoothProgress, [0, 0.15], [0, -25]);
+  const heroHeadingOpacity = useTransform(smoothProgress, [0, 0.14], [1, 0]);
+  const heroHeadingY = useTransform(smoothProgress, [0, 0.14], [0, -25]);
 
   /* ── STAGE 2 [0.26 – 0.54]: Midnight Black Full Silhouette ── */
   const stage2Opacity = useTransform(smoothProgress, [0.26, 0.34, 0.48, 0.54], [0, 1, 1, 0]);
   const blackFullY = useTransform(smoothProgress, [0.26, 0.34], [35, 0]);
   const blackFullScale = useTransform(smoothProgress, [0.26, 0.34], [0.96, 1.04]);
 
-  /* ── STAGE 3 [0.52 – 0.78]: Split Bodice & Standing Silhouette ── */
+  /* ── STAGE 3 [0.52 – 0.78]: Bodice Detail & Split Angle ── */
   const stage3Opacity = useTransform(smoothProgress, [0.52, 0.58, 0.72, 0.78], [0, 1, 1, 0]);
   const blackLeftX = useTransform(smoothProgress, [0.52, 0.60], ['-15%', '0%']);
   const blackLeftScale = useTransform(smoothProgress, [0.52, 0.60], [1, 0.82]);
   const blackRightX = useTransform(smoothProgress, [0.52, 0.60], ['18%', '0%']);
   const blackRightScale = useTransform(smoothProgress, [0.52, 0.60], [0.92, 1.05]);
 
-  /* ── STAGE 4 [0.76 – 1.00]: Sunburst Gold Finale ── */
+  /* ── STAGE 4 [0.76 – 1.00]: Sunburst Gold Atelier ── */
   const stage4Opacity = useTransform(smoothProgress, [0.76, 0.82, 0.98, 1], [0, 1, 1, 0]);
   const goldBackX = useTransform(smoothProgress, [0.76, 0.84], ['-18%', '0%']);
   const goldFrontX = useTransform(smoothProgress, [0.76, 0.84], ['18%', '0%']);
@@ -54,26 +54,36 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
     <div ref={containerRef} dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative h-[400vh] bg-white text-[#1A1A1A]">
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-between p-4 sm:p-6 md:p-12 z-10 select-none">
         
-        {/* Brand Header */}
-        <header className="w-full flex justify-between items-center z-50 pointer-events-auto">
-          <div className="relative w-28 h-9 sm:w-36 sm:h-12">
-            <Image
-              src="/images/brand-logo.jpg"
-              alt="Designer Wardrobe Atelier"
-              fill
-              className="object-contain object-left"
-              priority
-            />
-          </div>
-
-          <div className="flex items-center gap-3 sm:gap-6">
+        {/* ── CENTERED EDITORIAL HEADER ── */}
+        <header className="w-full grid grid-cols-3 items-center z-50 pointer-events-auto">
+          {/* Left: Language Switcher */}
+          <div className="flex items-center justify-start">
             <button
+              type="button"
               onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
-              className="text-[11px] sm:text-xs uppercase tracking-[0.2em] font-medium text-[#8C7A6B] hover:text-black transition-colors"
+              className="text-[11px] sm:text-xs uppercase tracking-[0.25em] font-medium text-[#8C7A6B] hover:text-black transition-colors"
             >
               {lang === 'en' ? 'العربية' : 'EN'}
             </button>
+          </div>
+
+          {/* Center: Enlarged Brand Logo */}
+          <div className="flex justify-center">
+            <div className="relative w-32 h-14 sm:w-44 sm:h-16 md:w-56 md:h-20">
+              <Image
+                src="/images/brand-logo.jpg"
+                alt="DW Boutique - Designed by Arwa Alfallaj"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Right: VIP Fitting CTA */}
+          <div className="flex items-center justify-end">
             <button
+              type="button"
               onClick={onOpenBooking}
               className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] px-4 sm:px-6 py-2 sm:py-2.5 bg-[#1A1A1A] text-white hover:bg-[#C5A880] transition-colors duration-300 shadow-sm"
             >
@@ -82,15 +92,17 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </header>
 
-        {/* ── STAGE 1: Emerald & Chair ── */}
+        {/* ── STAGE 1: Emerald & Atelier Velvet Chair ── */}
         <motion.div style={{ opacity: stage1Opacity }} className="absolute inset-0 pointer-events-none">
           <motion.div
             style={{ opacity: heroHeadingOpacity, y: heroHeadingY }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10"
           >
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] text-[#8C7A6B] mb-2 sm:mb-3 font-medium">
-              {lang === 'en' ? 'Haute Couture & Bridal Atelier' : 'دار الأزياء وتصاميم الأعراس'}
+            {/* Designer Sub-header */}
+            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] text-[#8C7A6B] mb-2 sm:mb-3 font-medium">
+              {lang === 'en' ? 'Designed by Arwa Alfallaj' : 'تصميم: أروى الفلاج'}
             </p>
+
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-light tracking-tight text-[#1A1A1A] leading-[1.15]">
               {lang === 'en' ? (
                 <>Architectural <span className="italic font-normal text-[#C5A880]">Majesty.</span></>
@@ -98,8 +110,13 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
                 <>فخامة معمارية.. <span className="italic font-normal text-[#C5A880]">وحضور ملكي.</span></>
               )}
             </h1>
-            <p className="text-[10px] sm:text-[11px] tracking-[0.25em] text-neutral-400 mt-4 sm:mt-6 uppercase">
-              {lang === 'en' ? 'Scroll to explore' : 'مرري للأسفل لاكتشاف المجموعة'}
+
+            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-neutral-400 mt-2 sm:mt-3">
+              {lang === 'en' ? 'Haute Couture & Bridal Atelier' : 'دار الأزياء وتصاميم الأعراس'}
+            </p>
+
+            <p className="text-[9px] sm:text-[10px] tracking-[0.25em] text-[#8C7A6B] mt-5 sm:mt-6 uppercase">
+              {lang === 'en' ? '↓ Scroll to explore collection' : '↓ مرري للأسفل لاكتشاف المجموعة'}
             </p>
           </motion.div>
 

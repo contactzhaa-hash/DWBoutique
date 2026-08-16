@@ -17,9 +17,9 @@ const REVIEWS = [
   },
   {
     quote:
-      "The private atelier experience in Buraydah was seamless. From the first fitting to the final silhouette adjustment, the level of couture precision is unmatched.",
+      "The private atelier experience in Buraydah was seamless. From the first fitting to the final silhouette adjustment, the level of couture precision by Arwa Alfallaj is unmatched.",
     quoteAr:
-      "تجربة زيارة الأتيليه في بريدة كانت غاية في الرقي. دقة متناهية في أخذ المقاسات وضبط التفاصيل حتى التسليم النهائي.",
+      "تجربة زيارة الأتيليه في بريدة كانت غاية في الرقي. دقة متناهية من المصممة أروى الفلاج في ضبط التفاصيل حتى التسليم النهائي.",
     author: "Sara Al-Harbi",
     authorAr: "سارة الحربي",
     date: "Haute Couture Client // سهرة خاصة",
@@ -128,10 +128,10 @@ export default function AtelierAndReviewsSection() {
               Direct Fittings
             </h3>
             <p className="text-xs leading-relaxed text-neutral-600 font-light">
-              WhatsApp: <a href="https://wa.me/966535962115" className="text-black font-medium hover:underline">+966 53 596 2115</a>
+              WhatsApp: <a href="https://wa.me/966535962115" target="_blank" rel="noopener noreferrer" className="text-black font-medium hover:underline">+966 53 596 2115</a>
             </p>
             <p className="text-xs leading-relaxed text-neutral-600 font-light mt-1">
-              Private fittings and bridal consultations arranged by appointment only.
+              Private fittings and couture consultations with Arwa Alfallaj arranged by appointment.
             </p>
           </div>
 
@@ -152,28 +152,60 @@ export default function AtelierAndReviewsSection() {
           </div>
         </div>
 
-        {/* ── ATELIER GRAND FOOTER & BRAND LOGO ── */}
-        <footer className="pt-12 border-t border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-          <div className="relative w-36 h-12">
-            <Image
-              src="/images/brand-logo.jpg"
-              alt="DW Boutique Logo"
-              fill
-              className="object-contain object-center sm:object-left"
-            />
+        {/* ── ATELIER GRAND FOOTER & SOCIAL LINKS ── */}
+        <footer className="pt-12 border-t border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+          
+          {/* Centered Brand Identity */}
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <div className="relative w-44 h-16">
+              <Image
+                src="/images/brand-logo.jpg"
+                alt="DW Boutique Atelier - Arwa Alfallaj"
+                fill
+                className="object-contain object-center md:object-left"
+              />
+            </div>
+            <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-400">
+              © {new Date().getFullYear()} DW BOUTIQUE // DESIGNED BY ARWA ALFALLAJ
+            </p>
           </div>
 
-          <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-400">
-            © {new Date().getFullYear()} DW BOUTIQUE ATELIER. BURAYDAH, SAUDI ARABIA.
-          </p>
+          {/* Social Channels */}
+          <div className="flex items-center gap-6 text-[11px] uppercase tracking-[0.2em] font-medium text-neutral-600">
+            <a
+              href="https://www.instagram.com/dw.boutique_"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-black transition-colors"
+            >
+              Instagram ↗
+            </a>
+            <a
+              href="https://www.snapchat.com/@dw.boutique"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-black transition-colors"
+            >
+              Snapchat ↗
+            </a>
+            <a
+              href="https://www.tiktok.com/@dw.boutique_"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-black transition-colors"
+            >
+              TikTok ↗
+            </a>
+          </div>
 
+          {/* Direct Concierge Link */}
           <a
             href="https://wa.me/966535962115"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] uppercase tracking-[0.2em] text-[#8C7A6B] hover:text-black transition-colors"
+            className="text-[10px] uppercase tracking-[0.2em] px-4 py-2 border border-neutral-300 hover:border-black text-[#1A1A1A] transition-all"
           >
-            Direct WhatsApp Concierge ↗
+            WhatsApp Concierge ↗
           </a>
         </footer>
 
