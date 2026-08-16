@@ -40,11 +40,11 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
 
   /* ── STAGE 3 [0.48 – 0.76]: Bodice Detail & Animated Cloud Mist ── */
   const stage3Opacity = useTransform(smoothProgress, [0.48, 0.56, 0.70, 0.76], [0, 1, 1, 0]);
-  const blackLeftX = useTransform(smoothProgress, [0.48, 0.58], ['-12%', '0%']);
-  const blackLeftScale = useTransform(smoothProgress, [0.48, 0.58], [1, 0.85]);
-  const blackRightX = useTransform(smoothProgress, [0.48, 0.58], ['15%', '0%']);
-  const blackRightScale = useTransform(smoothProgress, [0.48, 0.58], [0.94, 1.04]);
-  const stage3TextY = useTransform(smoothProgress, [0.48, 0.58], [25, 0]);
+  const blackLeftX = useTransform(smoothProgress, [0.48, 0.58], ['-10%', '0%']);
+  const blackLeftScale = useTransform(smoothProgress, [0.48, 0.58], [1, 0.88]);
+  const blackRightX = useTransform(smoothProgress, [0.48, 0.58], ['12%', '0%']);
+  const blackRightScale = useTransform(smoothProgress, [0.48, 0.58], [0.96, 1.02]);
+  const stage3TextY = useTransform(smoothProgress, [0.48, 0.58], [20, 0]);
 
   /* ── STAGE 4 [0.72 – 1.00]: Sunburst Gold Front & Back ── */
   const stage4Opacity = useTransform(smoothProgress, [0.72, 0.80, 1.0], [0, 1, 1]);
@@ -59,7 +59,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
     >
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-between p-4 sm:p-6 md:p-12 z-10 select-none">
         
-        {/* Persistent Editorial Header */}
+        {/* ── PERSISTENT EDITORIAL HEADER ── */}
         <header className="w-full grid grid-cols-3 items-center z-50 pointer-events-auto">
           <div className="flex items-center justify-start">
             <button
@@ -94,7 +94,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </header>
 
-        {/* ── STAGE 1: EMERALD GOWN & VELVET CHAIR ── */}
+        {/* ── STAGE 1: EMERALD GOWN & VELVET ATELIER CHAIR ── */}
         <motion.div
           style={{ opacity: stage1Opacity }}
           className="absolute inset-0 pointer-events-none"
@@ -126,7 +126,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
 
           <motion.div
             style={{ x: greenModelX, scale: greenModelScale }}
-            className="absolute left-2 sm:left-6 md:left-14 bottom-0 w-[48vw] sm:w-[38vw] md:w-[32vw] h-[86vh] md:h-[92vh] origin-bottom-left"
+            className="absolute left-2 sm:left-6 md:left-14 bottom-0 w-[44vw] sm:w-[36vw] md:w-[30vw] h-[86vh] md:h-[92vh] origin-bottom-left"
           >
             <Image
               src="/images/stage1-model-left.png"
@@ -139,7 +139,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
 
           <motion.div
             style={{ x: chairX, scale: chairScale }}
-            className="absolute right-2 sm:right-6 md:right-16 bottom-4 sm:bottom-6 w-[40vw] sm:w-[32vw] md:w-[26vw] h-[58vh] md:h-[68vh] origin-bottom-right"
+            className="absolute right-2 sm:right-6 md:right-16 bottom-4 sm:bottom-6 w-[38vw] sm:w-[30vw] md:w-[24vw] h-[58vh] md:h-[68vh] origin-bottom-right"
           >
             <Image
               src="/images/stage1-chair-right.png"
@@ -151,7 +151,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </motion.div>
         </motion.div>
 
-        {/* ── STAGE 2: MIDNIGHT BLACK SILHOUETTE ── */}
+        {/* ── STAGE 2: MIDNIGHT BLACK FULL SILHOUETTE ── */}
         <motion.div
           style={{ opacity: stage2Opacity, y: blackFullY, scale: blackFullScale }}
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -166,7 +166,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
             />
           </div>
 
-          <div className="absolute right-6 sm:right-12 md:right-28 top-1/2 -translate-y-1/2 text-right max-w-[48vw] md:max-w-none">
+          <div className="absolute right-6 sm:right-12 md:right-28 top-1/2 -translate-y-1/2 text-right max-w-[46vw] md:max-w-none">
             <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-[#8C7A6B]">
               {lang === 'en' ? 'Series 01 // Silhouette' : 'المجموعة الأولى // سحر السواد'}
             </span>
@@ -180,26 +180,66 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </motion.div>
 
-        {/* ── STAGE 3: BODICE DETAIL, MIST & NARRATIVE ── */}
+        {/* ── STAGE 3: BODICE DETAIL, MIST & DEDICATED COLUMN TEXT (NO OVERLAP) ── */}
         <motion.div
           style={{ opacity: stage3Opacity }}
           className="absolute inset-0 pointer-events-none"
         >
+          {/* Miniature Left Flank Silhouette */}
           <motion.div
             style={{ x: blackLeftX, scale: blackLeftScale }}
-            className="absolute left-0 sm:left-6 md:left-12 bottom-0 w-[38vw] sm:w-[30vw] md:w-[24vw] h-[78vh] md:h-[86vh] origin-bottom-left"
+            className="absolute left-2 sm:left-6 md:left-10 bottom-0 w-[26vw] sm:w-[20vw] md:w-[16vw] h-[70vh] md:h-[80vh] origin-bottom-left z-10"
           >
             <Image
               src="/images/stage2-black-full.png"
               alt="DW Silhouette"
               fill
-              className="object-contain object-bottom opacity-90"
+              className="object-contain object-bottom opacity-85"
             />
           </motion.div>
 
+          {/* Center Column Text Narrative - Explicitly bounded to prevent overlap */}
+          <motion.div
+            style={{ y: stage3TextY }}
+            className={`absolute top-[48%] -translate-y-1/2 z-20 ${
+              lang === 'ar'
+                ? 'right-[24vw] sm:right-[26vw] md:right-[24vw] left-auto text-right'
+                : 'left-[24vw] sm:left-[26vw] md:left-[24vw] right-auto text-left'
+            } w-[42vw] sm:w-[38vw] md:w-[32vw] max-w-md`}
+          >
+            <span className="inline-block text-[9px] sm:text-[10px] uppercase tracking-[0.35em] text-[#8C7A6B] font-medium border-b border-[#C5A880]/40 pb-1">
+              {lang === 'en' ? 'Bespoke Cut // Structure' : 'تفصيل خاص // دقة البناء'}
+            </span>
+
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-[#1A1A1A] mt-2.5 italic font-normal tracking-tight leading-tight">
+              {lang === 'en' ? 'Asymmetric Sculpted Neckline' : 'قصّة الكتف الانسيابية المنحوتة'}
+            </h3>
+
+            <p className="text-[11px] sm:text-xs md:text-sm text-neutral-600 font-light leading-relaxed mt-3">
+              {lang === 'en'
+                ? 'Hand-embellished jet crystals layered over French tulle, sculpting the silhouette with sharp architectural asymmetry.'
+                : 'تطريز يدوي دقيق بالكريستال الأسود البراق على طبقات التول الفرنسي الفاخر، صُممت بقصّة تبرز انسيابية القوام.'}
+            </p>
+
+            <div className={`flex flex-wrap items-center gap-2 sm:gap-4 mt-5 text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#8C7A6B] ${
+              lang === 'ar' ? 'justify-start' : 'justify-start'
+            }`}>
+              <span className="bg-neutral-100/80 px-2 py-0.5 border border-neutral-200">
+                {lang === 'en' ? 'Jet Crystal Mesh' : 'كريستال يدوي'}
+              </span>
+              <span className="bg-neutral-100/80 px-2 py-0.5 border border-neutral-200">
+                {lang === 'en' ? 'Italian Tulle' : 'تول إيطالي'}
+              </span>
+              <span className="bg-neutral-100/80 px-2 py-0.5 border border-neutral-200">
+                {lang === 'en' ? 'Custom Sizing' : 'مقاس مخصص'}
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Right Bodice Closeup + Attached Cloud Mist Mask */}
           <motion.div
             style={{ x: blackRightX, scale: blackRightScale }}
-            className="absolute right-0 sm:right-4 md:right-10 bottom-0 w-[58vw] sm:w-[48vw] md:w-[42vw] h-[88vh] md:h-[96vh] origin-bottom-right"
+            className="absolute right-0 bottom-0 w-[44vw] sm:w-[38vw] md:w-[34vw] h-[86vh] md:h-[94vh] origin-bottom-right z-10"
           >
             <Image
               src="/images/stage3-bodice-right.png"
@@ -208,58 +248,32 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
               className="object-contain object-bottom"
             />
 
-            {/* Cloud Mist Mask */}
+            {/* Floating Cloud Mist Mask positioned right above the model head */}
             <motion.div
               animate={{
-                x: [-6, 6, -6],
-                y: [-3, 4, -3],
-                scale: [1.22, 1.28, 1.22],
+                x: [-4, 4, -4],
+                y: [-2, 3, -2],
+                scale: [1.18, 1.24, 1.18],
               }}
               transition={{
-                duration: 7,
+                duration: 6,
                 repeat: Infinity,
                 repeatType: 'reverse',
                 ease: 'easeInOut',
               }}
-              className="absolute top-[6%] sm:top-[7%] right-[4%] sm:right-[6%] md:right-[7%] w-[48%] sm:w-[42%] md:w-[38%] h-[15%] sm:h-[16%] z-20 pointer-events-none"
+              className="absolute top-[2%] sm:top-[4%] right-[10%] sm:right-[14%] w-[52%] sm:w-[44%] h-[14%] sm:h-[15%] z-20 pointer-events-none"
             >
               <Image
                 src="/images/cloud-white.png"
-                alt="Editorial Mist Eye Mask"
+                alt="Editorial Mist"
                 fill
                 className="object-contain opacity-95 filter drop-shadow-sm"
               />
             </motion.div>
           </motion.div>
-
-          {/* Center Narrative Description */}
-          <motion.div
-            style={{ y: stage3TextY }}
-            className="absolute left-1/2 top-[46%] sm:top-[48%] -translate-x-1/2 -translate-y-1/2 w-[84vw] sm:w-[68vw] max-w-lg text-center z-30"
-          >
-            <span className="inline-block text-[9px] sm:text-[10px] uppercase tracking-[0.35em] text-[#8C7A6B] font-medium border-b border-[#C5A880]/40 pb-1">
-              {lang === 'en' ? 'Bespoke Cut // Couture Structure' : 'تفصيل خاص // دقة البناء'}
-            </span>
-
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif text-[#1A1A1A] mt-3 italic font-normal tracking-tight">
-              {lang === 'en' ? 'Asymmetric Sculpted Neckline' : 'قصّة الكتف الانسيابية المنحوتة'}
-            </h3>
-
-            <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed mt-4 max-w-md mx-auto">
-              {lang === 'en'
-                ? 'Hand-embellished jet crystals layered over structured French tulle. Crafted to sculpt the silhouette with sharp architectural asymmetry and nocturnal radiance.'
-                : 'تطريز يدوي دقيق بالكريستال الأسود البراق على طبقات التول الفرنسي الفاخر، صُممت بقصّة هندسية تبرز انسيابية القوام وهيبة الحضور.'}
-            </p>
-
-            <div className="flex items-center justify-center gap-3 sm:gap-6 mt-6 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-[#8C7A6B]">
-              <span>{lang === 'en' ? '• Jet Crystal Mesh' : '• كريستال يدوي'}</span>
-              <span>{lang === 'en' ? '• Italian Tulle' : '• تول إيطالي'}</span>
-              <span>{lang === 'en' ? '• Custom Sizing' : '• مقاس مخصص'}</span>
-            </div>
-          </motion.div>
         </motion.div>
 
-        {/* ── STAGE 4: SUNBURST GOLD ── */}
+        {/* ── STAGE 4: SUNBURST GOLD FRONT & BACK ── */}
         <motion.div
           style={{ opacity: stage4Opacity }}
           className="absolute inset-0 pointer-events-none flex items-center justify-center"
@@ -306,7 +320,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </motion.div>
 
-        {/* Footer Strip */}
+        {/* ── FOOTER STRIP ── */}
         <footer className="w-full flex justify-between items-end z-40 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-neutral-400 pointer-events-none">
           <span>{lang === 'en' ? 'Buraydah Atelier // حي الحزم' : 'أتيليه بريدة // حي الحزم'}</span>
           <span>{lang === 'en' ? 'Bespoke 2026 Collection' : 'مجموعة ٢٠٢٦ الخاصة'}</span>
