@@ -24,36 +24,34 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
     restDelta: 0.001,
   });
 
-  /* ── Responsive Transform Ranges & Mild Scale Increase ── */
-  const stage1Opacity = useTransform(smoothProgress, [0, 0.16, 0.22], [1, 1, 0]);
-  const greenModelX = useTransform(smoothProgress, [0, 0.20], ['0%', '-16%']);
-  const greenModelScale = useTransform(smoothProgress, [0, 0.20], [1.05, 0.88]);
-  const chairX = useTransform(smoothProgress, [0, 0.20], ['0%', '16%']);
-  const chairScale = useTransform(smoothProgress, [0, 0.20], [1.05, 0.82]);
-  const heroHeadingOpacity = useTransform(smoothProgress, [0, 0.10], [1, 0]);
-  const heroHeadingY = useTransform(smoothProgress, [0, 0.10], [0, -25]);
+  /* ── STAGE 1 [0.00 – 0.28]: Emerald & Atelier Velvet Chair ── */
+  const stage1Opacity = useTransform(smoothProgress, [0, 0.20, 0.28], [1, 1, 0]);
+  const greenModelX = useTransform(smoothProgress, [0, 0.25], ['0%', '-16%']);
+  const greenModelScale = useTransform(smoothProgress, [0, 0.25], [1.05, 0.88]);
+  const chairX = useTransform(smoothProgress, [0, 0.25], ['0%', '16%']);
+  const chairScale = useTransform(smoothProgress, [0, 0.25], [1.05, 0.82]);
+  const heroHeadingOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
+  const heroHeadingY = useTransform(smoothProgress, [0, 0.15], [0, -25]);
 
-  const stage2Opacity = useTransform(smoothProgress, [0.20, 0.26, 0.38, 0.44], [0, 1, 1, 0]);
-  const blackFullY = useTransform(smoothProgress, [0.20, 0.26], [35, 0]);
-  const blackFullScale = useTransform(smoothProgress, [0.20, 0.26], [0.96, 1.04]);
+  /* ── STAGE 2 [0.26 – 0.54]: Midnight Black Full Silhouette ── */
+  const stage2Opacity = useTransform(smoothProgress, [0.26, 0.34, 0.48, 0.54], [0, 1, 1, 0]);
+  const blackFullY = useTransform(smoothProgress, [0.26, 0.34], [35, 0]);
+  const blackFullScale = useTransform(smoothProgress, [0.26, 0.34], [0.96, 1.04]);
 
-  const stage3Opacity = useTransform(smoothProgress, [0.42, 0.48, 0.60, 0.66], [0, 1, 1, 0]);
-  const blackLeftX = useTransform(smoothProgress, [0.42, 0.50], ['-15%', '0%']);
-  const blackLeftScale = useTransform(smoothProgress, [0.42, 0.50], [1, 0.82]);
-  const blackRightX = useTransform(smoothProgress, [0.42, 0.50], ['18%', '0%']);
-  const blackRightScale = useTransform(smoothProgress, [0.42, 0.50], [0.92, 1.05]);
+  /* ── STAGE 3 [0.52 – 0.78]: Split Bodice & Standing Silhouette ── */
+  const stage3Opacity = useTransform(smoothProgress, [0.52, 0.58, 0.72, 0.78], [0, 1, 1, 0]);
+  const blackLeftX = useTransform(smoothProgress, [0.52, 0.60], ['-15%', '0%']);
+  const blackLeftScale = useTransform(smoothProgress, [0.52, 0.60], [1, 0.82]);
+  const blackRightX = useTransform(smoothProgress, [0.52, 0.60], ['18%', '0%']);
+  const blackRightScale = useTransform(smoothProgress, [0.52, 0.60], [0.92, 1.05]);
 
-  const stage4Opacity = useTransform(smoothProgress, [0.64, 0.70, 0.80, 0.84], [0, 1, 1, 0]);
-  const goldBackX = useTransform(smoothProgress, [0.64, 0.71], ['-18%', '0%']);
-  const goldFrontX = useTransform(smoothProgress, [0.64, 0.71], ['18%', '0%']);
-
-  const stage5Opacity = useTransform(smoothProgress, [0.82, 0.88, 0.98, 1], [0, 1, 1, 0]);
-  const finaleCenterScale = useTransform(smoothProgress, [0.82, 0.92], [0.90, 1.06]);
-  const finaleLeftX = useTransform(smoothProgress, [0.82, 0.92], ['-24%', '0%']);
-  const finaleRightX = useTransform(smoothProgress, [0.82, 0.92], ['24%', '0%']);
+  /* ── STAGE 4 [0.76 – 1.00]: Sunburst Gold Finale ── */
+  const stage4Opacity = useTransform(smoothProgress, [0.76, 0.82, 0.98, 1], [0, 1, 1, 0]);
+  const goldBackX = useTransform(smoothProgress, [0.76, 0.84], ['-18%', '0%']);
+  const goldFrontX = useTransform(smoothProgress, [0.76, 0.84], ['18%', '0%']);
 
   return (
-    <div ref={containerRef} dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative h-[480vh] md:h-[520vh] bg-white text-[#1A1A1A]">
+    <div ref={containerRef} dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative h-[400vh] bg-white text-[#1A1A1A]">
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-between p-4 sm:p-6 md:p-12 z-10 select-none">
         
         {/* Brand Header */}
@@ -84,7 +82,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </header>
 
-        {/* ── Stage 1: Emerald & Atelier Velvet Chair ── */}
+        {/* ── STAGE 1: Emerald & Chair ── */}
         <motion.div style={{ opacity: stage1Opacity }} className="absolute inset-0 pointer-events-none">
           <motion.div
             style={{ opacity: heroHeadingOpacity, y: heroHeadingY }}
@@ -120,7 +118,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </motion.div>
         </motion.div>
 
-        {/* ── Stage 2: Midnight Black Full Silhouette ── */}
+        {/* ── STAGE 2: Midnight Black Full Silhouette ── */}
         <motion.div
           style={{ opacity: stage2Opacity, y: blackFullY, scale: blackFullScale }}
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -143,7 +141,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </motion.div>
 
-        {/* ── Stage 3: Split Angles ── */}
+        {/* ── STAGE 3: Bodice & Split Angle ── */}
         <motion.div style={{ opacity: stage3Opacity }} className="absolute inset-0 pointer-events-none">
           <motion.div
             style={{ x: blackLeftX, scale: blackLeftScale }}
@@ -169,7 +167,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </motion.div>
 
-        {/* ── Stage 4: Sunburst Gold Front & Back ── */}
+        {/* ── STAGE 4: Sunburst Gold Front & Back ── */}
         <motion.div style={{ opacity: stage4Opacity }} className="absolute inset-0 pointer-events-none flex items-center justify-center">
           <div className="relative w-full h-full max-w-6xl mx-auto flex items-center justify-between px-2 sm:px-6">
             <motion.div style={{ x: goldBackX }} className="relative w-[48vw] sm:w-[38vw] md:w-[30vw] h-[80vh] md:h-[88vh] origin-bottom">
@@ -193,23 +191,6 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
               <p className="text-center text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-neutral-400 mt-1">
                 {lang === 'en' ? 'Front Bodice' : 'الصدرية المنحوتة'}
               </p>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* ── Stage 5: Finale Trio ── */}
-        <motion.div style={{ opacity: stage5Opacity }} className="absolute inset-0 pointer-events-none flex items-center justify-center">
-          <div className="relative w-full h-full max-w-7xl mx-auto flex items-center justify-center">
-            <motion.div style={{ x: finaleLeftX }} className="absolute left-0 sm:left-8 md:left-12 bottom-4 w-[40vw] sm:w-[30vw] md:w-[26vw] h-[74vh] md:h-[82vh] z-10 origin-bottom">
-              <Image src="/images/stage5-navy-corset-left.png" alt="DW Navy Corset" fill className="object-contain object-bottom" />
-            </motion.div>
-
-            <motion.div style={{ x: finaleRightX }} className="absolute right-0 sm:right-8 md:right-12 bottom-4 w-[40vw] sm:w-[30vw] md:w-[26vw] h-[74vh] md:h-[82vh] z-10 origin-bottom">
-              <Image src="/images/stage5-navy-profile-right.png" alt="DW Navy Profile" fill className="object-contain object-bottom" />
-            </motion.div>
-
-            <motion.div style={{ scale: finaleCenterScale }} className="relative w-[58vw] sm:w-[44vw] md:w-[34vw] h-[88vh] md:h-[96vh] z-30 origin-bottom">
-              <Image src="/images/stage5-ombre-center.png" alt="DW Ombre Gown" fill className="object-contain object-bottom" />
             </motion.div>
           </div>
         </motion.div>
