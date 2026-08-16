@@ -38,14 +38,14 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
   const blackFullY = useTransform(smoothProgress, [0.26, 0.34], [35, 0]);
   const blackFullScale = useTransform(smoothProgress, [0.26, 0.34], [0.96, 1.04]);
 
-  /* ── STAGE 3 [0.52 – 0.78]: Bodice Detail & Split Angle (Cloud Eye Mask) ── */
+  /* ── STAGE 3 [0.52 – 0.78]: Bodice Detail & Animated Cloud Eye Mask ── */
   const stage3Opacity = useTransform(smoothProgress, [0.52, 0.58, 0.72, 0.78], [0, 1, 1, 0]);
   const blackLeftX = useTransform(smoothProgress, [0.52, 0.60], ['-15%', '0%']);
   const blackLeftScale = useTransform(smoothProgress, [0.52, 0.60], [1, 0.82]);
   const blackRightX = useTransform(smoothProgress, [0.52, 0.60], ['18%', '0%']);
   const blackRightScale = useTransform(smoothProgress, [0.52, 0.60], [0.92, 1.05]);
 
-  /* ── STAGE 4 [0.76 – 1.00]: Sunburst Gold Atelier Finale ── */
+  /* ── STAGE 4 [0.76 – 1.00]: Sunburst Gold Atelier ── */
   const stage4Opacity = useTransform(smoothProgress, [0.76, 0.82, 0.98, 1], [0, 1, 1, 0]);
   const goldBackX = useTransform(smoothProgress, [0.76, 0.84], ['-18%', '0%']);
   const goldFrontX = useTransform(smoothProgress, [0.76, 0.84], ['18%', '0%']);
@@ -175,7 +175,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </motion.div>
 
-        {/* ── STAGE 3: Bodice & Split Angle (Cloud Eye Mask) ── */}
+        {/* ── STAGE 3: Bodice & Split Angle (Animated Cloud Eye Mask) ── */}
         <motion.div style={{ opacity: stage3Opacity }} className="absolute inset-0 pointer-events-none">
           {/* Left Silhouette */}
           <motion.div
@@ -190,7 +190,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
             />
           </motion.div>
 
-          {/* Right Bodice Closeup with Cloud Eye Mask */}
+          {/* Right Bodice Closeup with Animated Cloud Mask */}
           <motion.div
             style={{ x: blackRightX, scale: blackRightScale }}
             className="absolute right-0 sm:right-4 md:right-8 bottom-0 w-[62vw] sm:w-[52vw] md:w-[46vw] h-[88vh] md:h-[96vh] origin-bottom-right"
@@ -202,15 +202,28 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
               className="object-contain object-bottom"
             />
 
-            {/* Cloud Mask positioned across eyes/upper face */}
-            <div className="absolute top-[25%] right-[18%] w-[50%] h-[14%] z-20 pointer-events-none">
+            {/* Continuous Gentle Floating Mist Over Eyes & Forehead */}
+            <motion.div
+              animate={{
+                x: [-6, 6, -6],
+                y: [-3, 4, -3],
+                scale: [1.22, 1.28, 1.22],
+              }}
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                repeatType: 'reverse',
+                ease: 'easeInOut',
+              }}
+              className="absolute top-[6%] sm:top-[7%] right-[4%] sm:right-[6%] md:right-[7%] w-[48%] sm:w-[42%] md:w-[38%] h-[15%] sm:h-[16%] z-20 pointer-events-none"
+            >
               <Image
                 src="/images/cloud-white.png"
                 alt="Editorial Mist Eye Mask"
                 fill
-                className="object-contain scale-110 opacity-95 filter drop-shadow-sm"
+                className="object-contain opacity-95 filter drop-shadow-sm"
               />
-            </div>
+            </motion.div>
           </motion.div>
 
           <div className="absolute left-1/2 top-1/4 sm:top-1/3 -translate-x-1/2 -translate-y-1/2 text-center">
