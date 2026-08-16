@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CONTACT_INFO } from '@/config/contact';
 
 interface Props {
   isOpen: boolean;
@@ -11,114 +12,155 @@ interface Props {
 }
 
 export default function VIPAppointmentModal({ isOpen, onClose, selectedGown }: Props) {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    phone: '',
-    date: '',
-    fittingType: 'Bespoke Bridal Gown Fitting',
-    notes: selectedGown ? `Interested in: ${selectedGown}` : '',
-  });
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [type, setType] = useState('Bridal Suite Consultation');
+  const [notes, setNotes] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const whatsappMessage = `*طلب حجز موعد خاص - DW Boutique*%0A%0A*الاسم:* ${encodeURIComponent(formData.fullName)}%0A*رقم التواصل:* ${encodeURIComponent(formData.phone)}%0A*التاريخ المفضل:* ${encodeURIComponent(formData.date)}%0A*نوع الخدمة:* ${encodeURIComponent(formData.fittingType)}%0A*ملاحظات / الفستان المختار:* ${encodeURIComponent(formData.notes)}`;
-    
-    // Live WhatsApp routing to official boutique number
-    window.open(`https://wa.me/966535962115?text=${whatsappMessage}`, '_blank');
+
+    const message = `*طلب موعد قياس خاص - DW Boutique*
+--------------------------------
+• الاسم: ${name}
+• رقم التواصل: ${phone}
+• التاريخ المفضل: ${date || 'مرن'}
+• الوقت المفضل: ${time || 'مرن'}
+• نوع الجلسة: ${type}
+${selectedGown ? `• الفستان المطلوب: ${selectedGown}` : ''}
+${notes ? `• ملاحظات إضافية: ${notes}` : ''}
+--------------------------------
+تم الإرسال عبر الموقع الإلكتروني لبوتيك دابليو (Buraydah Atelier).`;
+
+    const whatsappUrl = `https://wa.me/${CONTACT_INFO.whatsappRaw}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
     onClose();
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-xl bg-white border border-neutral-200 p-8 md:p-12 shadow-2xl text-neutral-900"
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            className="relative w-full max-w-lg bg-[#FAF9F7] text-neutral-900 border border-neutral-200 p-6 sm:p-10 shadow-2xl overflow-y-auto max-h-[94vh]"
           >
+            {/* Close Button */}
             <button
+              type="button"
               onClick={onClose}
-              className="absolute top-6 right-6 text-neutral-400 hover:text-black text-xl font-light"
+              className="absolute top-4 right-4 text-neutral-400 hover:text-black text-2xl w-8 h-8 flex items-center justify-center"
             >
               ✕
             </button>
 
-            <div className="text-center mb-8">
-              <span className="text-[10px] uppercase tracking-[0.35em] text-[#8C7A6B]">Private Atelier // بريدة</span>
-              <h2 className="text-2xl md:text-3xl font-serif font-light mt-1">Reserve a VIP Fitting</h2>
-              <p className="text-xs text-neutral-500 mt-2 font-light">
-                6161 Western Ring Rd, Al Hazm, Buraydah | الطريق الدائري الغربي، حي الحزم، بريدة
-              </p>
+            <div className="text-center mb-6">
+              <span className="text-[9px] uppercase tracking-[0.35em] text-[#8C7A6B] font-medium">
+                VIP Fitting Reservation // حجز موعد خاص
+              </span>
+              <h2 className="text-2xl font-serif font-light text-neutral-900 mt-1">
+                Private Atelier Consultation
+              </h2>
+              {selectedGown && (
+                <p className="text-xs text-[#C5A880] mt-2 font-medium">
+                  Regarding: {selectedGown}
+                </p>
+              )}
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 mb-1">Full Name / الاسم الكريم</label>
+                <label className="block uppercase tracking-wider text-neutral-500 mb-1 text-[10px]">
+                  Full Name // الاسم الكريم *
+                </label>
                 <input
-                  required
                   type="text"
-                  value={formData.fullName}
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  placeholder="e.g. Noura Al-Harbi"
-                  className="w-full bg-[#FAF9F7] border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Nouf Al-Mansoor"
+                  className="w-full bg-white border border-neutral-300 p-3 text-neutral-900 focus:outline-none focus:border-black"
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block uppercase tracking-wider text-neutral-500 mb-1 text-[10px]">
+                  Phone Number // رقم التواصل *
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="053 596 2115"
+                  className="w-full bg-white border border-neutral-300 p-3 text-neutral-900 focus:outline-none focus:border-black"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 mb-1">Contact Number / رقم الجوال</label>
+                  <label className="block uppercase tracking-wider text-neutral-500 mb-1 text-[10px]">
+                    Preferred Date // التاريخ
+                  </label>
                   <input
-                    required
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="05X XXX XXXX"
-                    className="w-full bg-[#FAF9F7] border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black"
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className="w-full bg-white border border-neutral-300 p-3 text-neutral-900 focus:outline-none focus:border-black"
                   />
                 </div>
+
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 mb-1">Preferred Date / تاريخ الزيارة</label>
+                  <label className="block uppercase tracking-wider text-neutral-500 mb-1 text-[10px]">
+                    Preferred Time // الوقت
+                  </label>
                   <input
-                    required
-                    type="date"
-                    value={formData.date}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    className="w-full bg-[#FAF9F7] border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black"
+                    type="time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                    className="w-full bg-white border border-neutral-300 p-3 text-neutral-900 focus:outline-none focus:border-black"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 mb-1">Consultation Service / نوع الخدمة</label>
+                <label className="block uppercase tracking-wider text-neutral-500 mb-1 text-[10px]">
+                  Consultation Type // نوع الجلسة
+                </label>
                 <select
-                  value={formData.fittingType}
-                  onChange={(e) => setFormData({ ...formData, fittingType: e.target.value })}
-                  className="w-full bg-[#FAF9F7] border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                  className="w-full bg-white border border-neutral-300 p-3 text-neutral-900 focus:outline-none focus:border-black"
                 >
-                  <option>Bespoke Bridal Gown Fitting (تفصيل فستان زفاف خاص)</option>
-                  <option>Haute Couture Evening Wear (فساتين سهرة راقية)</option>
-                  <option>Private Showroom Suite Walkthrough (جولة خاصة في الأتيليه)</option>
+                  <option value="Bridal Suite Consultation">Bridal Suite Consultation (جلسة عرائس)</option>
+                  <option value="Evening Couture Fitting">Evening Couture Fitting (فساتين سهرة)</option>
+                  <option value="Bespoke Silhouette Design">Bespoke Silhouette Design (تصميم خاص)</option>
+                  <option value="Petite Couture">Petite Couture (أطفال ومناسبات)</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.2em] text-neutral-500 mb-1">Notes / ملاحظات إضافية</label>
+                <label className="block uppercase tracking-wider text-neutral-500 mb-1 text-[10px]">
+                  Special Requests / Measurements // ملاحظات
+                </label>
                 <textarea
-                  rows={2}
-                  value={formData.notes}
-                  onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  placeholder="Any specific requests or design preferences..."
-                  className="w-full bg-[#FAF9F7] border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black"
+                  rows={3}
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="Event date, specific silhouette preferences, or color requirements..."
+                  className="w-full bg-white border border-neutral-300 p-3 text-neutral-900 focus:outline-none focus:border-black resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 bg-neutral-900 text-white text-xs uppercase tracking-[0.25em] hover:bg-[#C5A880] transition-colors duration-300 font-medium"
+                className="w-full py-4 bg-[#1A1A1A] text-white hover:bg-[#C5A880] hover:text-black transition-colors duration-300 text-xs uppercase tracking-[0.25em] font-medium shadow-md mt-4"
               >
-                Send VIP Appointment via WhatsApp
+                Confirm & Dispatch to WhatsApp ({CONTACT_INFO.phoneDisplay})
               </button>
             </form>
           </motion.div>
