@@ -3,7 +3,6 @@
 
 import React, { useState } from 'react';
 import BrandIntroLoader from '@/components/BrandIntroLoader';
-import ShopEntranceExperience from '@/components/ShopEntranceExperience';
 import EditorialScrollExperience from '@/components/EditorialScrollExperience';
 import CollectionsSection from '@/components/CollectionsSection';
 import AtelierAndReviewsSection from '@/components/AtelierAndReviewsSection';
@@ -16,6 +15,8 @@ export default function HomePage() {
   const handleOpenBooking = (gownTitle?: string) => {
     if (gownTitle) {
       setSelectedGown(gownTitle);
+    } else {
+      setSelectedGown('');
     }
     setIsModalOpen(true);
   };
@@ -26,24 +27,19 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white text-[#1A1A1A]">
-      {/* Editorial Brand Intro */}
+      {/* 1. Brand Intro Reveal Curtain */}
       <BrandIntroLoader />
 
-       {/* 3D Walk-in Shop Front Entrance - Faster and simplfied walkthrough portal */}
-      <ShopEntranceExperience onOpenBooking={() => handleOpenBooking()} />
-
-
-      {/* Hero 4-Stage Interior Explore - picks up handoff immediately */}
+      {/* 2. 4-Stage Editorial Showcase (Emerald, Black Silhouette, Bodice/Mist, Gold) */}
       <EditorialScrollExperience onOpenBooking={() => handleOpenBooking()} />
 
-     
-      {/* Archive Collections */}
+      {/* 3. Product Archive & Multi-Angle Gown Gallery */}
       <CollectionsSection onSelectGown={(title) => handleOpenBooking(title)} />
 
-      {/* Reviews, Location & VIP Banner */}
+      {/* 4. Atelier Reviews, Map Location & VIP Banner */}
       <AtelierAndReviewsSection onOpenBooking={() => handleOpenBooking()} />
 
-      {/* VIP Fitting Modal */}
+      {/* 5. Booking Modal (WhatsApp Dispatch) */}
       <VIPAppointmentModal
         isOpen={isModalOpen}
         onClose={handleCloseBooking}
