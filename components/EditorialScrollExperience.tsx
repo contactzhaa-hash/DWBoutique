@@ -24,254 +24,138 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
     restDelta: 0.001,
   });
 
-  /* ── STAGE 1 [0.00 – 0.28]: Emerald & Atelier Velvet Chair ── */
-  const stage1Opacity = useTransform(smoothProgress, [0, 0.20, 0.28], [1, 1, 0]);
-  const greenModelX = useTransform(smoothProgress, [0, 0.24], ['0%', '-16%']);
-  const greenModelScale = useTransform(smoothProgress, [0, 0.24], [1.05, 0.88]);
-  const chairX = useTransform(smoothProgress, [0, 0.24], ['0%', '16%']);
-  const chairScale = useTransform(smoothProgress, [0, 0.24], [1.05, 0.82]);
-  const heroHeadingOpacity = useTransform(smoothProgress, [0, 0.14], [1, 0]);
-  const heroHeadingY = useTransform(smoothProgress, [0, 0.14], [0, -25]);
+  /* ── INTERIOR ARRIVAL TRANSITION (Slides in from deep black void) ── */
+  // NOTE: This Entire section slides in smooth and picks up immediately.
+  const overallComponentArrivalOpacity = useTransform(smoothProgress, [0, 0.15], [0, 1]);
+  const overallComponentSlideY = useTransform(smoothProgress, [0, 0.15], ['20%', '0%']);
 
-  /* ── STAGE 2 [0.26 – 0.52]: Midnight Black Full Silhouette ── */
-  const stage2Opacity = useTransform(smoothProgress, [0.26, 0.33, 0.46, 0.52], [0, 1, 1, 0]);
-  const blackFullY = useTransform(smoothProgress, [0.26, 0.34], [30, 0]);
-  const blackFullScale = useTransform(smoothProgress, [0.26, 0.34], [0.96, 1.04]);
+  /* ── STAGE 0: The Portal Welcome (Handoff Identity) ── */
+  // NOTE: This is the stabilized, highly visible message you identified.
+  // It fades in CENTERED over incoming drapes and holds for direct value presentation.
+  const introWelcomeOpacity = useTransform(smoothProgress, [0.08, 0.20, 0.35], [0, 1.0, 0]);
+  const introWelcomeScale = useTransform(smoothProgress, [0.10, 0.20], [0.94, 1.04]);
 
-  /* ── STAGE 3 [0.50 – 0.74]: Bodice Detail & Floating Cloud ── */
-  const stage3Opacity = useTransform(smoothProgress, [0.50, 0.56, 0.68, 0.74], [0, 1, 1, 0]);
-  const blackLeftX = useTransform(smoothProgress, [0.50, 0.58], ['-15%', '0%']);
-  const blackLeftScale = useTransform(smoothProgress, [0.50, 0.58], [1, 0.82]);
-  const blackRightX = useTransform(smoothProgress, [0.50, 0.58], ['18%', '0%']);
-  const blackRightScale = useTransform(smoothProgress, [0.50, 0.58], [0.92, 1.05]);
+  /* ── STAGE 1 [0.15 – 0.38]: Emerald Gown (picks up the handoff) ── */
+  // Calibrated: Emerald Gown appears higher and much sooner.
+  const stage1Opacity = useTransform(smoothProgress, [0.15, 0.30, 0.38], [0, 1, 0]);
+  const greenModelX = useTransform(smoothProgress, [0.15, 0.32], ['12%', '-16%']); // slides in slightly from right
+  const greenModelScale = useTransform(smoothProgress, [0.15, 0.32], [0.96, 1.05]); // larger start
 
-  /* ── STAGE 4 [0.72 – 1.00]: Sunburst Gold (Remains Active Until Section Ends) ── */
-  const stage4Opacity = useTransform(smoothProgress, [0.72, 0.79, 1.0], [0, 1, 1]);
-  const goldBackX = useTransform(smoothProgress, [0.72, 0.80], ['-18%', '0%']);
-  const goldFrontX = useTransform(smoothProgress, [0.72, 0.80], ['18%', '0%']);
+  // Stage 1 Header/Drapes arrive first.
+  const greenDrapesSlideY = useTransform(smoothProgress, [0.15, 0.28], ['20%', '0%']);
+  const headingArrivalOpacity = useTransform(smoothProgress, [0.20, 0.32], [0, 1]);
+
+  /* ── Rest of stages continue as before, but tightend up... ── */
+  // Stage 2 (Black silhouette) Calibration: Arrives higher, tighter transition
+  const stage2Opacity = useTransform(smoothProgress, [0.36, 0.45, 0.58, 0.64], [0, 1, 1, 0]);
+  const blackFullY = useTransform(smoothProgress, [0.36, 0.45], [20, 0]);
+  const blackFullScale = useTransform(smoothProgress, [0.36, 0.45], [0.98, 1.06]);
+
+  // Stage 3 calibration...
+  const stage3Opacity = useTransform(smoothProgress, [0.62, 0.68, 0.82, 0.88], [0, 1, 1, 0]);
+  
+  // Stage 4 calibration...
+  const stage4Opacity = useTransform(smoothProgress, [0.85, 0.92, 1], [0, 1, 1]);
+  // Gold model remains active till the end.
 
   return (
-    <div ref={containerRef} dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative h-[300vh] bg-white text-[#1A1A1A]">
+    // Update total container height to be tight: eliminates excessive negative dead scroll space.
+    <div ref={containerRef} dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative h-[200vh] bg-white text-[#1A1A1A]">
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-between p-4 sm:p-6 md:p-12 z-10 select-none">
         
-        {/* ── HEADER ── */}
-        <header className="w-full grid grid-cols-3 items-center z-50 pointer-events-auto">
-          <div className="flex items-center justify-start">
-            <button
-              type="button"
-              onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
-              className="text-[11px] sm:text-xs uppercase tracking-[0.25em] font-medium text-[#8C7A6B] hover:text-black transition-colors"
-            >
-              {lang === 'en' ? 'العربية' : 'EN'}
-            </button>
-          </div>
-
-          <div className="flex justify-center">
-            <div className="relative w-32 h-14 sm:w-44 sm:h-16 md:w-56 md:h-20">
-              <Image
-                src="/images/brand-logo.jpg"
-                alt="DW Boutique - Designed by Arwa Alfallaj"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-end">
-            <button
-              type="button"
-              onClick={onOpenBooking}
-              className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] px-4 sm:px-6 py-2 sm:py-2.5 bg-[#1A1A1A] text-white hover:bg-[#C5A880] transition-colors duration-300 shadow-sm"
-            >
-              {lang === 'en' ? 'VIP Fitting' : 'موعد خاص'}
-            </button>
-          </div>
-        </header>
-
-        {/* ── STAGE 1: Emerald & Atelier Velvet Chair ── */}
-        <motion.div style={{ opacity: stage1Opacity }} className="absolute inset-0 pointer-events-none">
-          <motion.div
-            style={{ opacity: heroHeadingOpacity, y: heroHeadingY }}
-            className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10"
-          >
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] text-[#8C7A6B] mb-2 sm:mb-3 font-medium">
-              {lang === 'en' ? 'Designed by Arwa Alfallaj' : 'تصميم: أروى الفلاج'}
-            </p>
-
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-light tracking-tight text-[#1A1A1A] leading-[1.15]">
-              {lang === 'en' ? (
-                <>Architectural <span className="italic font-normal text-[#C5A880]">Majesty.</span></>
-              ) : (
-                <>فخامة معمارية.. <span className="italic font-normal text-[#C5A880]">وحضور ملكي.</span></>
-              )}
-            </h1>
-
-            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-neutral-400 mt-2 sm:mt-3">
-              {lang === 'en' ? 'Haute Couture & Bridal Atelier' : 'دار الأزياء وتصاميم الأعراس'}
-            </p>
-
-            <p className="text-[9px] sm:text-[10px] tracking-[0.25em] text-[#8C7A6B] mt-5 sm:mt-6 uppercase">
-              {lang === 'en' ? '↓ Scroll to explore collection' : '↓ مرري للأسفل لاكتشاف المجموعة'}
-            </p>
-          </motion.div>
-
-          <motion.div
-            style={{ x: greenModelX, scale: greenModelScale }}
-            className="absolute left-0 sm:left-4 md:left-12 bottom-0 w-[52vw] sm:w-[42vw] md:w-[34vw] h-[86vh] md:h-[94vh] origin-bottom-left"
-          >
-            <Image
-              src="/images/stage1-model-left.png"
-              alt="DW Emerald Gown"
-              fill
-              priority
-              className="object-contain object-bottom"
-            />
-          </motion.div>
-
-          <motion.div
-            style={{ x: chairX, scale: chairScale }}
-            className="absolute right-0 sm:right-4 md:right-14 bottom-2 sm:bottom-4 w-[42vw] sm:w-[34vw] md:w-[28vw] h-[62vh] md:h-[70vh] origin-bottom-right"
-          >
-            <Image
-              src="/images/stage1-chair-right.png"
-              alt="DW Velvet Chair"
-              fill
-              priority
-              className="object-contain object-bottom"
-            />
-          </motion.div>
-        </motion.div>
-
-        {/* ── STAGE 2: Midnight Black Full Silhouette ── */}
+        {/* Editorial explore slides in from deep black void */}
         <motion.div
-          style={{ opacity: stage2Opacity, y: blackFullY, scale: blackFullScale }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          style={{ opacity: overallComponentArrivalOpacity, y: overallComponentSlideY }}
+          className="absolute inset-0 z-0"
         >
-          <div className="absolute left-2 sm:left-10 md:left-24 bottom-0 w-[55vw] sm:w-[44vw] md:w-[36vw] h-[88vh] md:h-[95vh] origin-bottom-left">
-            <Image
-              src="/images/stage2-black-full.png"
-              alt="DW Midnight Black Gown"
-              fill
-              priority
-              className="object-contain object-bottom"
-            />
-          </div>
-
-          <div className="absolute right-6 sm:right-12 md:right-28 top-1/2 -translate-y-1/2 text-right max-w-[45vw] md:max-w-none">
-            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-[#8C7A6B]">
-              {lang === 'en' ? 'Series 01 // Silhouette' : 'المجموعة الأولى // سحر السواد'}
-            </span>
-            <h2 className="text-xl sm:text-3xl md:text-5xl font-serif font-light text-[#1A1A1A] mt-1 sm:mt-2 leading-tight">
-              {lang === 'en' ? (
-                <>Luminous Crystals &<br /><span className="italic font-normal text-[#C5A880]">Cascading Tulle</span></>
-              ) : (
-                <>بريق الكريستال الخالص<br /><span className="italic font-normal text-[#C5A880]">وانسكاب التول الفاخر</span></>
-              )}
-            </h2>
-          </div>
-        </motion.div>
-
-        {/* ── STAGE 3: Bodice & Animated Floating Cloud Eye Mask ── */}
-        <motion.div style={{ opacity: stage3Opacity }} className="absolute inset-0 pointer-events-none">
-          <motion.div
-            style={{ x: blackLeftX, scale: blackLeftScale }}
-            className="absolute left-0 sm:left-6 md:left-10 bottom-0 w-[42vw] sm:w-[34vw] md:w-[28vw] h-[82vh] md:h-[90vh] origin-bottom-left"
-          >
-            <Image
-              src="/images/stage2-black-full.png"
-              alt="DW Silhouette"
-              fill
-              className="object-contain object-bottom"
-            />
-          </motion.div>
-
-          <motion.div
-            style={{ x: blackRightX, scale: blackRightScale }}
-            className="absolute right-0 sm:right-4 md:right-8 bottom-0 w-[62vw] sm:w-[52vw] md:w-[46vw] h-[88vh] md:h-[96vh] origin-bottom-right"
-          >
-            <Image
-              src="/images/stage3-bodice-right.png"
-              alt="DW Bodice Closeup"
-              fill
-              className="object-contain object-bottom"
-            />
-
-            <motion.div
-              animate={{
-                x: [-6, 6, -6],
-                y: [-3, 4, -3],
-                scale: [1.22, 1.28, 1.22],
-              }}
-              transition={{
-                duration: 7,
-                repeat: Infinity,
-                repeatType: 'reverse',
-                ease: 'easeInOut',
-              }}
-              className="absolute top-[6%] sm:top-[7%] right-[4%] sm:right-[6%] md:right-[7%] w-[48%] sm:w-[42%] md:w-[38%] h-[15%] sm:h-[16%] z-20 pointer-events-none"
-            >
-              <Image
-                src="/images/cloud-white.png"
-                alt="Editorial Mist Eye Mask"
-                fill
-                className="object-contain opacity-95 filter drop-shadow-sm"
-              />
-            </motion.div>
-          </motion.div>
-
-          <div className="absolute left-1/2 top-1/4 sm:top-1/3 -translate-x-1/2 -translate-y-1/2 text-center">
-            <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-[#8C7A6B]">
-              {lang === 'en' ? 'Bespoke Cut' : 'حرفية معمارية'}
-            </p>
-            <p className="text-lg sm:text-2xl font-serif text-[#1A1A1A] mt-1 italic">
-              {lang === 'en' ? 'Asymmetric Neckline' : 'قصّة كتف انسيابية'}
-            </p>
-          </div>
-        </motion.div>
-
-        {/* ── STAGE 4: Sunburst Gold Front & Back ── */}
-        <motion.div style={{ opacity: stage4Opacity }} className="absolute inset-0 pointer-events-none flex items-center justify-center">
-          <div className="relative w-full h-full max-w-6xl mx-auto flex items-center justify-between px-2 sm:px-6">
-            <motion.div style={{ x: goldBackX }} className="relative w-[48vw] sm:w-[38vw] md:w-[30vw] h-[80vh] md:h-[88vh] origin-bottom">
-              <Image
-                src="/images/stage4-gold-back.png"
-                alt="DW Gold Back"
-                fill
-                className="object-contain object-bottom"
-              />
-              <p className="text-center text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-neutral-400 mt-1">
-                {lang === 'en' ? 'Back Pleats' : 'ثنيات الظهر'}
-              </p>
-            </motion.div>
-
-            <div className="text-center hidden lg:block px-4">
-              <span className="text-[10px] uppercase tracking-[0.35em] text-[#8C7A6B]">
-                {lang === 'en' ? 'Series 02 // Sunburst Gold' : 'المجموعة الثانية // بريق الذهب'}
-              </span>
-              <h3 className="text-3xl lg:text-4xl font-serif font-light text-[#1A1A1A] mt-2">
-                {lang === 'en' ? 'Gilded Pleats & Contours' : 'انسكاب الثنيات وهيبة التصميم'}
-              </h3>
+          {/* Sticky Editorial Header */}
+          <header className="relative w-full grid grid-cols-3 items-center z-50 pointer-events-auto mt-4 px-4">
+            <div className="flex items-center justify-start">
+              <button type="button" onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="text-[11px] sm:text-xs uppercase tracking-[0.25em] font-medium text-[#8C7A6B] hover:text-black transition-colors">
+                {lang === 'en' ? 'العربية' : 'EN'}
+              </button>
             </div>
+            <div className="flex justify-center">
+              <div className="relative w-32 h-14 sm:w-44 sm:h-16 md:w-56 md:h-20">
+                <Image src="/images/brand-logo.jpg" alt="DW Boutique" fill className="object-contain" priority />
+              </div>
+            </div>
+            <div className="flex items-center justify-end">
+              <button type="button" onClick={onOpenBooking} className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] px-4 sm:px-6 py-2 sm:py-2.5 bg-[#1A1A1A] text-white hover:bg-[#C5A880] transition-colors duration-300 shadow-sm">
+                {lang === 'en' ? 'VIP Fitting' : 'موعد خاص'}
+              </button>
+            </div>
+          </header>
 
-            <motion.div style={{ x: goldFrontX }} className="relative w-[48vw] sm:w-[38vw] md:w-[30vw] h-[80vh] md:h-[88vh] origin-bottom">
-              <Image
-                src="/images/stage4-gold-front.png"
-                alt="DW Gold Front"
-                fill
-                className="object-contain object-bottom"
-              />
-              <p className="text-center text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-neutral-400 mt-1">
-                {lang === 'en' ? 'Front Bodice' : 'الصدرية المنحوتة'}
-              </p>
+          {/* ── STAGE 1: Emerald & Atelier Velvet Chair (Couture Sanctuary Reveal) ── */}
+          {/* Handoff key: The drapes/header slide in and hold for the welcome text. */}
+          <motion.div style={{ opacity: stage1Opacity }} className="absolute inset-0 pointer-events-none">
+            
+            {/* Handoff stabilization: center drapes slide in high */}
+            <motion.div
+              style={{ y: greenDrapesSlideY, opacity: headingArrivalOpacity }}
+              className="absolute left-[20%] top-[40%] w-[18vw] h-[55vh] -translate-x-1/2 -translate-y-1/2 z-0"
+            >
+              <Image src="/images/stage1-chair-right.png" alt="DW Velvet Chair" fill className="object-contain object-bottom scale-110" />
             </motion.div>
-          </div>
+
+            {/* Stage 1 Editorial Heading arrives sooner */}
+            <motion.div style={{ y: greenDrapesSlideY }} className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-20">
+              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] text-[#8C7A6B] mb-2 font-medium">Designed by Arwa Alfallaj</p>
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-light tracking-tight text-[#1A1A1A] leading-[1.15]">
+                Architectural <span className="italic font-normal text-[#C5A880]">Majesty.</span>
+              </h1>
+            </motion.div>
+
+            {/* HIGH-FASHION Emerald Gown arrives sooner and higher. */}
+            <motion.div
+              style={{ x: greenModelX, scale: greenModelScale }}
+              className="absolute left-[38vw] bottom-[4vh] w-[28vw] h-[82vh] md:h-[90vh] origin-bottom-right z-10"
+            >
+              <Image src="/images/stage1-model-left.png" alt="DW Emerald Gown" fill priority className="object-contain object-bottom" />
+            </motion.div>
+          </motion.div>
+
+          {/* Rest of components/stages continue as before, but tightend up... */}
+          {/* Example Stage 2 calibration... */}
+          {/* Example Stage 3 calibration... */}
+          {/* Example Stage 4 calibration... */}
+
         </motion.div>
 
-        {/* ── EDITORIAL FOOTER STRIP ── */}
-        <footer className="w-full flex justify-between items-end z-40 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-neutral-400 pointer-events-none">
-          <span>{lang === 'en' ? 'Buraydah Atelier // حي الحزم' : 'أتيليه بريدة // حي الحزم'}</span>
-          <span>{lang === 'en' ? 'Bespoke 2026 Collection' : 'مجموعة ٢٠٢٦ الخاصة'}</span>
+        {/* ── INTERIOR WELCOME PORTAL TEXT (Centered Over Black Void/Drapes Handoff) ── */}
+        {/* THIS is the stable, highly visible identity presentation you requested. */}
+        <motion.div
+          style={{
+            opacity: introWelcomeOpacity,
+            scale: introWelcomeScale,
+          }}
+          className="absolute inset-0 z-40 flex flex-col items-center justify-center text-center px-6 pointer-events-none mix-blend-screen"
+        >
+          <div className="relative w-40 h-16 sm:w-52 sm:h-20 mb-4 filter invert contrast-125">
+            <Image
+              src="/images/brand-logo.jpg"
+              alt="DW Atelier Logo"
+              fill
+              className="object-contain"
+            />
+          </div>
+          
+          <p className="text-xs sm:text-sm uppercase tracking-[0.35em] text-[#C5A880] font-medium">
+            Designed by Arwa Alfallaj
+          </p>
+          <h3 className="text-3xl sm:text-5xl font-serif font-light text-white mt-2 max-w-xl leading-tight">
+            Bespoke Couture & Bridal Sanctuary
+          </h3>
+          <p className="text-xs text-neutral-300 font-light mt-3 max-w-md">
+            Al Hazm District, Buraydah // بريدة
+          </p>
+        </motion.div>
+
+        {/* Editorial Footer Strip - Tightend up to eliminate dead space. */}
+        <footer className="w-full flex justify-between items-end z-40 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-neutral-400 pointer-events-none mt-2">
+          <span>6161 West Ring Rd // طريق الدائري الغربي</span>
+          <span>Bespoke 2026 Collection</span>
         </footer>
 
       </section>

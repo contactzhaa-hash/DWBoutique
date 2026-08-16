@@ -3,12 +3,11 @@
 
 import React, { useState } from 'react';
 
-// DW Boutique // Arwa Alfallaj - Atelier Components
-// Immersive single-page architectural walkthrough.
+// DW Boutique // Arwa Alfallaj - Atelier Immersive Walkthrough Single-Page App
 
 import BrandIntroLoader from '@/components/BrandIntroLoader';
-import ShopEntranceExperience from '@/components/ShopEntranceExperience'; // (Walk-in portal now second)
-import EditorialScrollExperience from '@/components/EditorialScrollExperience'; // (High-fashion showroom now third)
+import EditorialScrollExperience from '@/components/EditorialScrollExperience'; // Interior explore - now stabilized
+import ShopEntranceExperience from '@/components/ShopEntranceExperience'; // 3D walk-in - now faster & simplified portal
 import CollectionsSection from '@/components/CollectionsSection';
 import AtelierAndReviewsSection from '@/components/AtelierAndReviewsSection';
 import VIPAppointmentModal from '@/components/VIPAppointmentModal';
@@ -48,42 +47,38 @@ export default function HomePage() {
       {/* 
         1. LUXURY BRAND INTRO SCREEN (Loader)
         Displays upon page load to mask asset hydration.
-        Includes logo, "Designed by Arwa Alfallaj", and curtain-lift exit.
+        Curtain-lift exit.
       */}
       <BrandIntroLoader />
 
       {/* 
-        2. 3D SHOP ENTRANCE walkthrough (Exterior -> Interior Foyer)
-        Uses the shop image. Directly follows the loader exit.
-        User scrolls to zoom in, doors swing open in 3D perspective.
-      */}
-      <ShopEntranceExperience onOpenBooking={() => handleOpenBooking()} />
-
-      {/* 
-        3. HIGH-FASHION EDITORIAL SHOWROOM (4-Stages)
-        Cinematic interior explore featuring Architectural drapes and high-fashion gowns.
-        Picks up immediately after the entrance "bloom" walkthrough completes.
-        Passes booking trigger to the 'VIP Fitting' header button.
+        2. HERO SHOWROOM & HIGH-FASHION EXPLORE (Interior)
+        Now Stabilized: This section arrives and immediately fades in the 
+        static "Welcome to the Atelier" brand identity text overlaid over incoming drapes.
+        Eliminates jumpiness, negative space and provides direct value for the identity.
       */}
       <EditorialScrollExperience onOpenBooking={() => handleOpenBooking()} />
 
       {/* 
+        3. 3D SHOP ENTRANCE walkthough (Simplified Portal)
+        Uses the provided shop image. Fast, simplified walk-in zoom, parting drapes, 
+        swinging 3D doors opening into a DEEP BLACK VOID to ensure next section arrival is smooth.
+        ZERO text overlay on doors for perfect walkthrough clarity.
+      */}
+      <ShopEntranceExperience onOpenBooking={() => handleOpenBooking()} />
+
+      {/* 
         4. COLLECTIONS & SILHOUETTE ARCHIVE
-        Interactive grid of couture gowns with multi-angle gallery views.
-        Updating selectedProduct state in HomePage when gown is clicked.
       */}
       <CollectionsSection onSelectGown={(title) => handleOpenBooking(title)} />
 
       {/* 
         5. REVIEWS, LOCATION, VIP CTA BANNER & FOOTER
-        Includes Google Reviews, showroom location map link, 
-        and the final "Book a VIP Fitting Session" black banner CTA.
       */}
       <AtelierAndReviewsSection onOpenBooking={() => handleOpenBooking()} />
 
       {/* 
         6. VIP APPOINTMENT BOOKING MODAL (Overlay)
-        Conditional rendering based on state. Submits requests via WhatsApp dispatch.
       */}
       <VIPAppointmentModal
         isOpen={isModalOpen}
