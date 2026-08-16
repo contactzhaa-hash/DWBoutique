@@ -9,10 +9,10 @@ export default function BrandIntroLoader() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Elegant 1.8s intro reveal timer
+    // 2.2s total presentation time before lifting the curtain
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1800);
+    }, 2200);
 
     return () => clearTimeout(timer);
   }, []);
@@ -24,49 +24,57 @@ export default function BrandIntroLoader() {
           initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
-            y: '-10%',
-            transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+            y: '-100%',
+            transition: { duration: 1, ease: [0.77, 0, 0.175, 1] },
           }}
-          className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center pointer-events-auto select-none px-6"
+          className="fixed inset-0 z-[100] bg-[#FAF9F7] flex flex-col items-center justify-center pointer-events-auto select-none px-6"
         >
-          <div className="flex flex-col items-center text-center space-y-6">
+          <div className="flex flex-col items-center text-center space-y-6 max-w-md mx-auto">
             
-            {/* DW Brand Logo Fade & Scale */}
+            {/* 1. Main DW Logo Reveal */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="relative w-48 h-20 sm:w-60 sm:h-24"
+              initial={{ opacity: 0, y: 15, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-44 h-20 sm:w-56 sm:h-24"
             >
               <Image
                 src="/images/brand-logo.jpg"
-                alt="DW Boutique Atelier"
+                alt="DW Boutique Logo"
                 fill
                 className="object-contain"
                 priority
               />
             </motion.div>
 
-            {/* Gold Hairline Progress Pulse */}
+            {/* 2. Expanding Gold Atelier Accent Line */}
             <motion.div
               initial={{ width: 0, opacity: 0 }}
-              animate={{ width: 120, opacity: 1 }}
-              transition={{ duration: 1.2, ease: 'easeInOut', delay: 0.2 }}
+              animate={{ width: 140, opacity: 1 }}
+              transition={{ duration: 1.1, ease: 'easeInOut', delay: 0.3 }}
               className="h-[1px] bg-gradient-to-r from-transparent via-[#C5A880] to-transparent"
             />
 
-            {/* Sub-Brand Monogram */}
+            {/* 3. Designer Attribution & Subtitles */}
             <motion.div
-              initial={{ opacity: 0, y: 6 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-1"
+              transition={{ duration: 0.7, delay: 0.55 }}
+              className="space-y-2"
             >
-              <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.35em] text-[#8C7A6B]">
-                Designed by Arwa Alfallaj
-              </p>
-              <p className="text-[8px] uppercase tracking-[0.25em] text-neutral-400">
-                Buraydah // بريدة
+              {/* Designer Name in English & Arabic */}
+              <div className="space-y-0.5">
+                <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-[#1A1A1A] font-serif font-medium">
+                  Designed by Arwa Alfallaj
+                </p>
+                <p className="text-[11px] text-[#8C7A6B] font-light dir-rtl">
+                  تصميم: أروى الفلاج
+                </p>
+              </div>
+
+              {/* Couture Atelier Sub-label */}
+              <p className="text-[9px] uppercase tracking-[0.25em] text-neutral-400 pt-1">
+                Haute Couture & Bridal Atelier // Buraydah
               </p>
             </motion.div>
 
