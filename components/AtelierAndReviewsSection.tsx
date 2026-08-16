@@ -7,6 +7,13 @@ interface Props {
   onOpenBooking: () => void;
 }
 
+const WHATSAPP_RAW = '966535962115';
+const PHONE_DISPLAY = '+966 53 596 2115';
+const EMAIL_CONTACT = 'dwboutique.sa@gmail.com';
+const ADDRESS_EN = '6161 West Ring Rd, Al Hazm District, Buraydah';
+const ADDRESS_AR = 'طريق الدائري الغربي، حي الحزم، بريدة';
+const MAPS_URL = 'https://maps.google.com/?q=DW+Boutique+Buraydah';
+
 const WORKING_HOURS = [
   { dayEn: 'Saturday', dayAr: 'السبت', hours: '7:00 AM – 1:00 AM' },
   { dayEn: 'Sunday', dayAr: 'الأحد', hours: '7:00 AM – 1:00 AM' },
@@ -44,14 +51,11 @@ const REVIEWS = [
 function StarRating({ rating = 4.5 }: { rating?: number }) {
   return (
     <div className="inline-flex items-center gap-1 text-[#C5A880]">
-      {/* 4 Full Stars */}
       {[...Array(4)].map((_, i) => (
         <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
       ))}
-
-      {/* Half Star */}
       <svg className="w-4 h-4" viewBox="0 0 20 20">
         <defs>
           <linearGradient id="halfStarGrad">
@@ -113,8 +117,8 @@ export default function AtelierAndReviewsSection({ onOpenBooking }: Props) {
     return () => clearInterval(interval);
   }, []);
 
-  const whatsappDirectUrl = `https://wa.me/966500000000?text=${encodeURIComponent(
-    'Hello DW Boutique Atelier, I would like to inquire about private appointments and collection availability.'
+  const whatsappDirectUrl = `https://wa.me/${WHATSAPP_RAW}?text=${encodeURIComponent(
+    'مرحباً بوتيك دابليو (DW Boutique)، أود الاستفسار عن المجموعات وحجز موعد قياس خاص.'
   )}`;
 
   return (
@@ -193,9 +197,9 @@ export default function AtelierAndReviewsSection({ onOpenBooking }: Props) {
                   <span className="text-[#8C7A6B] uppercase tracking-wider text-[10px] block mb-1">
                     Address:
                   </span>
-                  <p className="text-neutral-200">6161 West Ring Rd, Al Hazm District</p>
+                  <p className="text-neutral-200">{ADDRESS_EN}</p>
                   <p className="text-neutral-400 dir-rtl text-right text-[11px] mt-0.5">
-                    طريق الدائري الغربي، حي الحزم، بريدة
+                    {ADDRESS_AR}
                   </p>
                 </div>
 
@@ -203,8 +207,8 @@ export default function AtelierAndReviewsSection({ onOpenBooking }: Props) {
                   <span className="text-[#8C7A6B] uppercase tracking-wider text-[10px] block mb-1">
                     Direct Assistance:
                   </span>
-                  <p className="text-neutral-200">+966 50 000 0000</p>
-                  <p className="text-neutral-400 text-[11px]">dwboutique.sa@gmail.com</p>
+                  <p className="text-neutral-200 font-mono tracking-wide">{PHONE_DISPLAY}</p>
+                  <p className="text-neutral-400 text-[11px]">{EMAIL_CONTACT}</p>
                 </div>
               </div>
             </div>
@@ -216,11 +220,11 @@ export default function AtelierAndReviewsSection({ onOpenBooking }: Props) {
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-full py-3.5 bg-emerald-700 hover:bg-emerald-600 text-white transition-colors duration-300 text-[10px] uppercase tracking-[0.25em] font-medium shadow-md"
               >
-                Chat on WhatsApp ↗
+                Chat on WhatsApp ({PHONE_DISPLAY}) ↗
               </a>
 
               <a
-                href="https://maps.google.com/?q=DW+Boutique+Buraydah"
+                href={MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-full py-3.5 border border-[#C5A880] text-[#C5A880] hover:bg-[#C5A880] hover:text-black transition-colors duration-300 text-[10px] uppercase tracking-[0.25em] font-medium"
@@ -230,7 +234,7 @@ export default function AtelierAndReviewsSection({ onOpenBooking }: Props) {
             </div>
           </div>
 
-          {/* Operating Schedule Table with Real-time KSA Status */}
+          {/* Operating Schedule Table with Dynamic Status Badge */}
           <div className="lg:col-span-7 bg-white p-8 sm:p-10 border border-neutral-200 shadow-sm flex flex-col justify-between">
             <div>
               <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-4 border-b border-neutral-200 mb-6 gap-3">
@@ -288,7 +292,7 @@ export default function AtelierAndReviewsSection({ onOpenBooking }: Props) {
 
         </div>
 
-        {/* ── FINAL VIP BOOKING BANNER ── */}
+        {/* ── FINAL VIP BOOKING CTA BANNER ── */}
         <div className="relative overflow-hidden bg-neutral-900 text-white p-8 sm:p-14 text-center border border-neutral-800 shadow-xl">
           <div className="max-w-2xl mx-auto space-y-4">
             <span className="text-[10px] uppercase tracking-[0.4em] text-[#C5A880] font-medium">

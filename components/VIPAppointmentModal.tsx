@@ -3,13 +3,15 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CONTACT_INFO } from '@/config/contact';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   selectedGown?: string;
 }
+
+const WHATSAPP_RAW = '966535962115';
+const PHONE_DISPLAY = '+966 53 596 2115';
 
 export default function VIPAppointmentModal({ isOpen, onClose, selectedGown }: Props) {
   const [name, setName] = useState('');
@@ -34,7 +36,7 @@ ${notes ? `• ملاحظات إضافية: ${notes}` : ''}
 --------------------------------
 تم الإرسال عبر الموقع الإلكتروني لبوتيك دابليو (Buraydah Atelier).`;
 
-    const whatsappUrl = `https://wa.me/${CONTACT_INFO.whatsappRaw}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${WHATSAPP_RAW}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     onClose();
   };
@@ -160,7 +162,7 @@ ${notes ? `• ملاحظات إضافية: ${notes}` : ''}
                 type="submit"
                 className="w-full py-4 bg-[#1A1A1A] text-white hover:bg-[#C5A880] hover:text-black transition-colors duration-300 text-xs uppercase tracking-[0.25em] font-medium shadow-md mt-4"
               >
-                Confirm & Dispatch to WhatsApp ({CONTACT_INFO.phoneDisplay})
+                Confirm & Dispatch to WhatsApp ({PHONE_DISPLAY})
               </button>
             </form>
           </motion.div>
