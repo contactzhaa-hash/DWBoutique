@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import BrandIntroLoader from '@/components/BrandIntroLoader';
 import EditorialScrollExperience from '@/components/EditorialScrollExperience';
 import CollectionsSection from '@/components/CollectionsSection';
 import AtelierAndReviewsSection from '@/components/AtelierAndReviewsSection';
@@ -24,9 +25,12 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white text-[#1A1A1A]">
+      {/* Editorial Brand Intro Screen */}
+      <BrandIntroLoader />
+
       <EditorialScrollExperience onOpenBooking={() => handleOpenBooking()} />
       <CollectionsSection onSelectGown={(title) => handleOpenBooking(title)} />
-      <AtelierAndReviewsSection />
+      <AtelierAndReviewsSection onOpenBooking={() => handleOpenBooking()} />
       <VIPAppointmentModal
         isOpen={isModalOpen}
         onClose={handleCloseBooking}
