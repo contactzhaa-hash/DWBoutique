@@ -44,6 +44,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
   const blackLeftScale = useTransform(smoothProgress, [0.48, 0.58], [1, 0.85]);
   const blackRightX = useTransform(smoothProgress, [0.48, 0.58], ['15%', '0%']);
   const blackRightScale = useTransform(smoothProgress, [0.48, 0.58], [0.94, 1.04]);
+  const stage3TextY = useTransform(smoothProgress, [0.48, 0.58], [25, 0]);
 
   /* ── STAGE 4 [0.72 – 1.00]: Sunburst Gold Front & Back ── */
   const stage4Opacity = useTransform(smoothProgress, [0.72, 0.80, 1.0], [0, 1, 1]);
@@ -179,26 +180,28 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </motion.div>
 
-        {/* ── STAGE 3: BODICE DETAIL & CLOUD MIST ── */}
+        {/* ── STAGE 3: BODICE DETAIL, CLOUD MIST & EDITORIAL COPY ── */}
         <motion.div
           style={{ opacity: stage3Opacity }}
           className="absolute inset-0 pointer-events-none"
         >
+          {/* Miniature Left Silhouette */}
           <motion.div
             style={{ x: blackLeftX, scale: blackLeftScale }}
-            className="absolute left-0 sm:left-6 md:left-12 bottom-0 w-[42vw] sm:w-[34vw] md:w-[28vw] h-[82vh] md:h-[90vh] origin-bottom-left"
+            className="absolute left-0 sm:left-6 md:left-12 bottom-0 w-[38vw] sm:w-[30vw] md:w-[24vw] h-[78vh] md:h-[86vh] origin-bottom-left"
           >
             <Image
               src="/images/stage2-black-full.png"
               alt="DW Silhouette"
               fill
-              className="object-contain object-bottom"
+              className="object-contain object-bottom opacity-90"
             />
           </motion.div>
 
+          {/* Right Bodice Closeup + Floating Mist */}
           <motion.div
             style={{ x: blackRightX, scale: blackRightScale }}
-            className="absolute right-0 sm:right-4 md:right-10 bottom-0 w-[60vw] sm:w-[50vw] md:w-[44vw] h-[88vh] md:h-[96vh] origin-bottom-right"
+            className="absolute right-0 sm:right-4 md:right-10 bottom-0 w-[58vw] sm:w-[48vw] md:w-[42vw] h-[88vh] md:h-[96vh] origin-bottom-right"
           >
             <Image
               src="/images/stage3-bodice-right.png"
@@ -231,14 +234,33 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
             </motion.div>
           </motion.div>
 
-          <div className="absolute left-1/2 top-1/4 sm:top-1/3 -translate-x-1/2 -translate-y-1/2 text-center">
-            <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-[#8C7A6B]">
-              {lang === 'en' ? 'Bespoke Cut' : 'حرفية معمارية'}
+          {/* Center Editorial Narrative & Specifications */}
+          <motion.div
+            style={{ y: stage3TextY }}
+            className="absolute left-1/2 top-[46%] sm:top-[48%] -translate-x-1/2 -translate-y-1/2 w-[84vw] sm:w-[68vw] max-w-lg text-center z-30"
+          >
+            <span className="inline-block text-[9px] sm:text-[10px] uppercase tracking-[0.35em] text-[#8C7A6B] font-medium border-b border-[#C5A880]/40 pb-1">
+              {lang === 'en' ? 'Bespoke Cut // Couture Structure' : 'تفصيل خاص // دقة البناء'}
+            </span>
+
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif text-[#1A1A1A] mt-3 italic font-normal tracking-tight">
+              {lang === 'en' ? 'Asymmetric Sculpted Neckline' : 'قصّة الكتف الانسيابية المنحوتة'}
+            </h3>
+
+            {/* Editorial 2-3 Line Narrative */}
+            <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed mt-4 max-w-md mx-auto">
+              {lang === 'en'
+                ? 'Hand-embellished jet crystals layered over structured French tulle. Crafted to sculpt the silhouette with sharp architectural asymmetry and nocturnal radiance.'
+                : 'تطريز يدوي دقيق بالكريستال الأسود البراق على طبقات التول الفرنسي الفاخر، صُممت بقصّة هندسية تبرز انسيابية القوام وهيبة الحضور.'}
             </p>
-            <p className="text-lg sm:text-2xl font-serif text-[#1A1A1A] mt-1 italic">
-              {lang === 'en' ? 'Asymmetric Neckline' : 'قصّة كتف انسيابية'}
-            </p>
-          </div>
+
+            {/* Couture Metadata Chips */}
+            <div className="flex items-center justify-center gap-3 sm:gap-6 mt-6 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-[#8C7A6B]">
+              <span>{lang === 'en' ? '• Jet Crystal Mesh' : '• كريستال يدوي'}</span>
+              <span>{lang === 'en' ? '• Italian Tulle' : '• تول إيطالي'}</span>
+              <span>{lang === 'en' ? '• Custom Sizing' : '• مقاس مخصص'}</span>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* ── STAGE 4: SUNBURST GOLD FRONT & BACK ── */}
