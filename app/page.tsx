@@ -4,19 +4,18 @@
 import React, { useState } from 'react';
 
 // DW Boutique // Arwa Alfallaj - Atelier Components
-// Note: Ensure all component files (.tsx) are created in the '/components/' directory
-// and that required image assets exist in the '/public/images/' directory.
+// Immersive single-page architectural walkthrough.
 
 import BrandIntroLoader from '@/components/BrandIntroLoader';
-import EditorialScrollExperience from '@/components/EditorialScrollExperience';
-import ShopEntranceExperience from '@/components/ShopEntranceExperience';
+import ShopEntranceExperience from '@/components/ShopEntranceExperience'; // (Walk-in portal now second)
+import EditorialScrollExperience from '@/components/EditorialScrollExperience'; // (High-fashion showroom now third)
 import CollectionsSection from '@/components/CollectionsSection';
 import AtelierAndReviewsSection from '@/components/AtelierAndReviewsSection';
 import VIPAppointmentModal from '@/components/VIPAppointmentModal';
 
 /**
- * Main HomePage Component for DW Boutique Atelier.
- * Stitches together the immersive single-page scroll experience.
+ * HomePage Component for DW Boutique Atelier.
+ * Defines the cinematic, scroll-driven physical journey.
  */
 export default function HomePage() {
   // State management for the VIP Booking Modal and selected gown reference
@@ -48,35 +47,36 @@ export default function HomePage() {
       
       {/* 
         1. LUXURY BRAND INTRO SCREEN (Loader)
-        Displays immediately upon page load to mask asset hydration.
+        Displays upon page load to mask asset hydration.
         Includes logo, "Designed by Arwa Alfallaj", and curtain-lift exit.
       */}
       <BrandIntroLoader />
 
       {/* 
-        2. EDITORIAL SCROLL HERO (4-Stages)
-        Cinematic motion typography and high-fashion editorial drapes.
-        Passes the booking trigger to the 'VIP Fitting' header button.
+        2. 3D SHOP ENTRANCE walkthrough (Exterior -> Interior Foyer)
+        Uses the shop image. Directly follows the loader exit.
+        User scrolls to zoom in, doors swing open in 3D perspective.
+      */}
+      <ShopEntranceExperience onOpenBooking={() => handleOpenBooking()} />
+
+      {/* 
+        3. HIGH-FASHION EDITORIAL SHOWROOM (4-Stages)
+        Cinematic interior explore featuring Architectural drapes and high-fashion gowns.
+        Picks up immediately after the entrance "bloom" walkthrough completes.
+        Passes booking trigger to the 'VIP Fitting' header button.
       */}
       <EditorialScrollExperience onOpenBooking={() => handleOpenBooking()} />
 
       {/* 
-        3. 3D WALK-IN SHOP ENTRANCE WALKTHROUGH
-        Uses the provided shop image. As the user scrolls, the camera zooms, 
-        drapes part, and 3D glass doors swing open to reveal the atelier interior.
-      */}
-      <ShopEntranceExperience />
-
-      {/* 
         4. COLLECTIONS & SILHOUETTE ARCHIVE
         Interactive grid of couture gowns with multi-angle gallery views.
-        Passing onSelectGown updates the modal state before opening it.
+        Updating selectedProduct state in HomePage when gown is clicked.
       */}
       <CollectionsSection onSelectGown={(title) => handleOpenBooking(title)} />
 
       {/* 
-        5. REVIEWS, LOCATION, VIP BANNER & FOOTER
-        Includes Google Reviews from brides, showroom location map link, 
+        5. REVIEWS, LOCATION, VIP CTA BANNER & FOOTER
+        Includes Google Reviews, showroom location map link, 
         and the final "Book a VIP Fitting Session" black banner CTA.
       */}
       <AtelierAndReviewsSection onOpenBooking={() => handleOpenBooking()} />
