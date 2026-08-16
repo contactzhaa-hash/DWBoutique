@@ -59,7 +59,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
     >
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-between p-4 sm:p-6 md:p-12 z-10 select-none">
         
-        {/* ── PERSISTENT EDITORIAL HEADER ── */}
+        {/* Persistent Editorial Header */}
         <header className="w-full grid grid-cols-3 items-center z-50 pointer-events-auto">
           <div className="flex items-center justify-start">
             <button
@@ -94,7 +94,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </header>
 
-        {/* ── STAGE 1: EMERALD GOWN & VELVET ATELIER CHAIR ── */}
+        {/* ── STAGE 1: EMERALD GOWN & VELVET CHAIR ── */}
         <motion.div
           style={{ opacity: stage1Opacity }}
           className="absolute inset-0 pointer-events-none"
@@ -151,7 +151,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </motion.div>
         </motion.div>
 
-        {/* ── STAGE 2: MIDNIGHT BLACK FULL SILHOUETTE ── */}
+        {/* ── STAGE 2: MIDNIGHT BLACK SILHOUETTE ── */}
         <motion.div
           style={{ opacity: stage2Opacity, y: blackFullY, scale: blackFullScale }}
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -180,12 +180,11 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </motion.div>
 
-        {/* ── STAGE 3: BODICE DETAIL, CLOUD MIST & EDITORIAL COPY ── */}
+        {/* ── STAGE 3: BODICE DETAIL, MIST & NARRATIVE ── */}
         <motion.div
           style={{ opacity: stage3Opacity }}
           className="absolute inset-0 pointer-events-none"
         >
-          {/* Miniature Left Silhouette */}
           <motion.div
             style={{ x: blackLeftX, scale: blackLeftScale }}
             className="absolute left-0 sm:left-6 md:left-12 bottom-0 w-[38vw] sm:w-[30vw] md:w-[24vw] h-[78vh] md:h-[86vh] origin-bottom-left"
@@ -198,7 +197,6 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
             />
           </motion.div>
 
-          {/* Right Bodice Closeup + Floating Mist */}
           <motion.div
             style={{ x: blackRightX, scale: blackRightScale }}
             className="absolute right-0 sm:right-4 md:right-10 bottom-0 w-[58vw] sm:w-[48vw] md:w-[42vw] h-[88vh] md:h-[96vh] origin-bottom-right"
@@ -210,7 +208,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
               className="object-contain object-bottom"
             />
 
-            {/* Floating Cloud Mist Mask */}
+            {/* Cloud Mist Mask */}
             <motion.div
               animate={{
                 x: [-6, 6, -6],
@@ -234,7 +232,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
             </motion.div>
           </motion.div>
 
-          {/* Center Editorial Narrative & Specifications */}
+          {/* Center Narrative Description */}
           <motion.div
             style={{ y: stage3TextY }}
             className="absolute left-1/2 top-[46%] sm:top-[48%] -translate-x-1/2 -translate-y-1/2 w-[84vw] sm:w-[68vw] max-w-lg text-center z-30"
@@ -247,14 +245,12 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
               {lang === 'en' ? 'Asymmetric Sculpted Neckline' : 'قصّة الكتف الانسيابية المنحوتة'}
             </h3>
 
-            {/* Editorial 2-3 Line Narrative */}
             <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed mt-4 max-w-md mx-auto">
               {lang === 'en'
                 ? 'Hand-embellished jet crystals layered over structured French tulle. Crafted to sculpt the silhouette with sharp architectural asymmetry and nocturnal radiance.'
                 : 'تطريز يدوي دقيق بالكريستال الأسود البراق على طبقات التول الفرنسي الفاخر، صُممت بقصّة هندسية تبرز انسيابية القوام وهيبة الحضور.'}
             </p>
 
-            {/* Couture Metadata Chips */}
             <div className="flex items-center justify-center gap-3 sm:gap-6 mt-6 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-[#8C7A6B]">
               <span>{lang === 'en' ? '• Jet Crystal Mesh' : '• كريستال يدوي'}</span>
               <span>{lang === 'en' ? '• Italian Tulle' : '• تول إيطالي'}</span>
@@ -263,7 +259,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </motion.div>
         </motion.div>
 
-        {/* ── STAGE 4: SUNBURST GOLD FRONT & BACK ── */}
+        {/* ── STAGE 4: SUNBURST GOLD ── */}
         <motion.div
           style={{ opacity: stage4Opacity }}
           className="absolute inset-0 pointer-events-none flex items-center justify-center"
@@ -310,7 +306,7 @@ export default function EditorialScrollExperience({ onOpenBooking }: Props) {
           </div>
         </motion.div>
 
-        {/* ── FOOTER STRIP ── */}
+        {/* Footer Strip */}
         <footer className="w-full flex justify-between items-end z-40 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-neutral-400 pointer-events-none">
           <span>{lang === 'en' ? 'Buraydah Atelier // حي الحزم' : 'أتيليه بريدة // حي الحزم'}</span>
           <span>{lang === 'en' ? 'Bespoke 2026 Collection' : 'مجموعة ٢٠٢٦ الخاصة'}</span>
