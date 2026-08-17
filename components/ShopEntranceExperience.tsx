@@ -23,21 +23,21 @@ export default function ShopEntranceExperience({ onOpenBooking }: Props) {
     restDelta: 0.001,
   });
 
-  /* ── 3D Camera & Walkthrough Transforms (Targeted to Doorway) ── */
+  /* ── 3D Camera & Walkthrough Transforms ── */
   const facadeScale = useTransform(smoothProgress, [0, 0.65, 1.0], [1, 2.2, 4.2]);
   const facadeY = useTransform(smoothProgress, [0, 0.65, 1.0], ['0%', '-4%', '-10%']);
 
   const titleOpacity = useTransform(smoothProgress, [0, 0.2], [1, 0]);
   const titleY = useTransform(smoothProgress, [0, 0.2], [0, -30]);
 
-  // 3D Glass Door Swing (Opening into Showroom)
-  const leftDoorRotateY = useTransform(smoothProgress, [0.2, 0.7], [0, -88]);
-  const rightDoorRotateY = useTransform(smoothProgress, [0.2, 0.7], [0, 88]);
+  // 3D Glass Door Swing
+  const leftDoorRotateY = useTransform(smoothProgress, [0.2, 0.7], [0, -85]);
+  const rightDoorRotateY = useTransform(smoothProgress, [0.2, 0.7], [0, 85]);
   const doorOpacity = useTransform(smoothProgress, [0.65, 0.9], [1, 0]);
 
   // In-shop White Sheer Drapes Parting
-  const leftCurtainX = useTransform(smoothProgress, [0.25, 0.75], ['0%', '-45%']);
-  const rightCurtainX = useTransform(smoothProgress, [0.25, 0.75], ['0%', '45%']);
+  const leftCurtainX = useTransform(smoothProgress, [0.25, 0.75], ['0%', '-40%']);
+  const rightCurtainX = useTransform(smoothProgress, [0.25, 0.75], ['0%', '40%']);
 
   // Outer Flanking Drapes Parting (Fills Side Dead Space)
   const outerLeftDrapeX = useTransform(smoothProgress, [0, 0.6], ['0%', '-40%']);
@@ -113,7 +113,7 @@ export default function ShopEntranceExperience({ onOpenBooking }: Props) {
           </p>
         </motion.div>
 
-        {/* ── 3D FACADE & CALIBRATED DOORWAY PORTAL ── */}
+        {/* ── 3D FACADE & PRECISE DOORWAY PORTAL ── */}
         <motion.div
           style={{ opacity: sectionFadeOut }}
           className="relative w-full h-full flex items-center justify-center [perspective:1400px]"
@@ -122,7 +122,7 @@ export default function ShopEntranceExperience({ onOpenBooking }: Props) {
             style={{
               scale: facadeScale,
               y: facadeY,
-              transformOrigin: '64.5% 76%', // Centers camera zoom into the entrance doorway
+              transformOrigin: '48.5% 76%', // Centers camera zoom precisely between the two marked doors
             }}
             className="relative w-[95vw] sm:w-[88vw] md:w-[80vw] aspect-[16/10] max-w-6xl shadow-2xl rounded-sm overflow-hidden"
           >
@@ -137,40 +137,40 @@ export default function ShopEntranceExperience({ onOpenBooking }: Props) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/15 pointer-events-none" />
 
-            {/* Left 3D Glass Door Leaf (Calibrated to Right Bay Doorway) */}
+            {/* ── LEFT DOOR (Left Red Box: Inner Left Bay) ── */}
             <motion.div
               style={{
                 rotateY: leftDoorRotateY,
                 opacity: doorOpacity,
                 transformOrigin: 'left center',
               }}
-              className="absolute left-[50.2%] top-[59.2%] w-[14.5%] h-[34.2%] border-r-2 border-[#C5A880]/90 bg-white/10 backdrop-blur-[0.5px] shadow-lg pointer-events-none [transform-style:preserve-3d]"
+              className="absolute left-[35.5%] top-[59.2%] w-[11.2%] h-[34.2%] border-r-2 border-[#C5A880]/90 bg-white/10 backdrop-blur-[0.5px] shadow-lg pointer-events-none [transform-style:preserve-3d]"
             >
-              {/* Brushed Brass Vertical Handle */}
-              <div className="absolute right-2 sm:right-3 top-[30%] w-1 sm:w-1.5 h-16 sm:h-20 bg-gradient-to-b from-[#E6D5B8] via-[#C5A880] to-[#8C7A6B] rounded-full shadow-md" />
+              {/* Brushed Brass Vertical Handle (Right Edge) */}
+              <div className="absolute right-2 top-[32%] w-1 sm:w-1.5 h-14 sm:h-18 bg-gradient-to-b from-[#E6D5B8] via-[#C5A880] to-[#8C7A6B] rounded-full shadow-md" />
             </motion.div>
 
-            {/* Right 3D Glass Door Leaf (Calibrated to Right Bay Doorway) */}
+            {/* ── RIGHT DOOR (Right Red Box: Inner Right Bay) ── */}
             <motion.div
               style={{
                 rotateY: rightDoorRotateY,
                 opacity: doorOpacity,
                 transformOrigin: 'right center',
               }}
-              className="absolute left-[64.7%] top-[59.2%] w-[14.5%] h-[34.2%] border-l-2 border-[#C5A880]/90 bg-white/10 backdrop-blur-[0.5px] shadow-lg pointer-events-none [transform-style:preserve-3d]"
+              className="absolute left-[50.2%] top-[59.2%] w-[11.2%] h-[34.2%] border-l-2 border-[#C5A880]/90 bg-white/10 backdrop-blur-[0.5px] shadow-lg pointer-events-none [transform-style:preserve-3d]"
             >
-              {/* Brushed Brass Vertical Handle */}
-              <div className="absolute left-2 sm:left-3 top-[30%] w-1 sm:w-1.5 h-16 sm:h-20 bg-gradient-to-b from-[#E6D5B8] via-[#C5A880] to-[#8C7A6B] rounded-full shadow-md" />
+              {/* Brushed Brass Vertical Handle (Left Edge) */}
+              <div className="absolute left-2 top-[32%] w-1 sm:w-1.5 h-14 sm:h-18 bg-gradient-to-b from-[#E6D5B8] via-[#C5A880] to-[#8C7A6B] rounded-full shadow-md" />
             </motion.div>
 
-            {/* Parting Interior Drapes */}
+            {/* Parting Sheer Accents */}
             <motion.div
               style={{ x: leftCurtainX }}
-              className="absolute left-[48%] top-[59%] w-[6%] h-[34%] bg-gradient-to-r from-white/30 to-transparent pointer-events-none"
+              className="absolute left-[33%] top-[59%] w-[4%] h-[34%] bg-gradient-to-r from-white/20 to-transparent pointer-events-none"
             />
             <motion.div
               style={{ x: rightCurtainX }}
-              className="absolute right-[20%] top-[59%] w-[6%] h-[34%] bg-gradient-to-l from-white/30 to-transparent pointer-events-none"
+              className="absolute left-[60%] top-[59%] w-[4%] h-[34%] bg-gradient-to-l from-white/20 to-transparent pointer-events-none"
             />
           </motion.div>
         </motion.div>
