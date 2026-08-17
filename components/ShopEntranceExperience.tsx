@@ -50,7 +50,7 @@ export default function ShopEntranceExperience({ onOpenBooking }: Props) {
     <div ref={containerRef} className="relative h-[220vh] bg-[#121212] text-white">
       <section className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-between items-center select-none">
         
-        {/* ── AMBIENT SIDE FABRIC WINGS (ELIMINATES BLACK SPACE) ── */}
+        {/* ── AMBIENT SIDE FABRIC WINGS ── */}
         <motion.div
           style={{ x: outerLeftDrapeX, opacity: sectionFadeOut }}
           className="absolute left-0 top-0 bottom-0 w-[14vw] lg:w-[16vw] z-10 pointer-events-none bg-gradient-to-r from-stone-900 via-stone-800/80 to-transparent border-r border-amber-900/20 shadow-2xl backdrop-blur-[1px]"
@@ -122,8 +122,9 @@ export default function ShopEntranceExperience({ onOpenBooking }: Props) {
             style={{ scale: facadeScale, y: facadeY }}
             className="relative w-[95vw] sm:w-[88vw] md:w-[80vw] aspect-[16/10] max-w-6xl shadow-2xl rounded-sm overflow-hidden"
           >
+            {/* New Storefront Image */}
             <Image
-              src="/images/dw-shop-front.jpg"
+              src="/images/dw-store-front2.jpeg"
               alt="DW Boutique Exterior"
               fill
               priority
