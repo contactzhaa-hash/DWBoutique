@@ -113,7 +113,7 @@ export default function ShopEntranceExperience({ onOpenBooking }: Props) {
           </p>
         </motion.div>
 
-        {/* ── 3D FACADE & PRECISE DOORWAY PORTAL ── */}
+        {/* ── 3D FACADE & CALIBRATED DOORWAY PORTAL ── */}
         <motion.div
           style={{ opacity: sectionFadeOut }}
           className="relative w-full h-full flex items-center justify-center [perspective:1400px]"
@@ -122,7 +122,7 @@ export default function ShopEntranceExperience({ onOpenBooking }: Props) {
             style={{
               scale: facadeScale,
               y: facadeY,
-              transformOrigin: '48.5% 76%', // Centers camera zoom precisely between the two marked doors
+              transformOrigin: '48.5% 75%',
             }}
             className="relative w-[95vw] sm:w-[88vw] md:w-[80vw] aspect-[16/10] max-w-6xl shadow-2xl rounded-sm overflow-hidden"
           >
@@ -137,40 +137,40 @@ export default function ShopEntranceExperience({ onOpenBooking }: Props) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/15 pointer-events-none" />
 
-            {/* ── LEFT DOOR (Left Red Box: Inner Left Bay) ── */}
+            {/* ── LEFT DOOR (Kerned Outward + Raised Bottom) ── */}
             <motion.div
               style={{
                 rotateY: leftDoorRotateY,
                 opacity: doorOpacity,
                 transformOrigin: 'left center',
               }}
-              className="absolute left-[35.5%] top-[59.2%] w-[11.2%] h-[34.2%] border-r-2 border-[#C5A880]/90 bg-white/10 backdrop-blur-[0.5px] shadow-lg pointer-events-none [transform-style:preserve-3d]"
+              className="absolute left-[34.6%] top-[59.2%] w-[11.8%] h-[32.6%] border-r-2 border-[#C5A880]/90 bg-white/10 backdrop-blur-[0.5px] shadow-lg pointer-events-none [transform-style:preserve-3d]"
             >
-              {/* Brushed Brass Vertical Handle (Right Edge) */}
+              {/* Brushed Brass Handle */}
               <div className="absolute right-2 top-[32%] w-1 sm:w-1.5 h-14 sm:h-18 bg-gradient-to-b from-[#E6D5B8] via-[#C5A880] to-[#8C7A6B] rounded-full shadow-md" />
             </motion.div>
 
-            {/* ── RIGHT DOOR (Right Red Box: Inner Right Bay) ── */}
+            {/* ── RIGHT DOOR (Raised Bottom) ── */}
             <motion.div
               style={{
                 rotateY: rightDoorRotateY,
                 opacity: doorOpacity,
                 transformOrigin: 'right center',
               }}
-              className="absolute left-[50.2%] top-[59.2%] w-[11.2%] h-[34.2%] border-l-2 border-[#C5A880]/90 bg-white/10 backdrop-blur-[0.5px] shadow-lg pointer-events-none [transform-style:preserve-3d]"
+              className="absolute left-[50.2%] top-[59.2%] w-[11.8%] h-[32.6%] border-l-2 border-[#C5A880]/90 bg-white/10 backdrop-blur-[0.5px] shadow-lg pointer-events-none [transform-style:preserve-3d]"
             >
-              {/* Brushed Brass Vertical Handle (Left Edge) */}
+              {/* Brushed Brass Handle */}
               <div className="absolute left-2 top-[32%] w-1 sm:w-1.5 h-14 sm:h-18 bg-gradient-to-b from-[#E6D5B8] via-[#C5A880] to-[#8C7A6B] rounded-full shadow-md" />
             </motion.div>
 
             {/* Parting Sheer Accents */}
             <motion.div
               style={{ x: leftCurtainX }}
-              className="absolute left-[33%] top-[59%] w-[4%] h-[34%] bg-gradient-to-r from-white/20 to-transparent pointer-events-none"
+              className="absolute left-[32%] top-[59%] w-[4%] h-[32%] bg-gradient-to-r from-white/20 to-transparent pointer-events-none"
             />
             <motion.div
               style={{ x: rightCurtainX }}
-              className="absolute left-[60%] top-[59%] w-[4%] h-[34%] bg-gradient-to-l from-white/20 to-transparent pointer-events-none"
+              className="absolute left-[60%] top-[59%] w-[4%] h-[32%] bg-gradient-to-l from-white/20 to-transparent pointer-events-none"
             />
           </motion.div>
         </motion.div>
