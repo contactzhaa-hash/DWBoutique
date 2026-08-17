@@ -26,48 +26,60 @@ const WORKING_HOURS = [
 
 const REVIEWS = [
   {
-    author: 'Nouf Al-Mutairi',
-    role: 'Bridal Client',
-    commentEn: 'The attention to detail in Arwa’s custom bridal gown was beyond expectation. The fit and fabric drape were absolutely majestic.',
-    commentAr: 'الاهتمام بأدق التفاصيل في فستان الزفاف فاق التوقعات. القماش والقصّة الملكية كانت مبهرة جداً.',
-    rating: 4.5,
+    author: 'Mona (منى)',
+    role: 'Bespoke Fitting & Alterations',
+    commentEn: 'Sincere thanks to designer Arwa and coordinator Rahaf for crafting my daughter’s dress to perfection and accommodating post-fitting alterations until I was completely satisfied.',
+    commentAr: 'أشكر المصممة الصبورة أروى والمنسقة اللطيفة رهف على تعاونهن في إخراج فستان بنتي بأجمل حُلّة، وصبرهن على التعديلات بعد البروفة حتى خرجت راضية تمام الرضا.',
+    rating: 5,
   },
   {
-    author: 'Reem Al-Harbi',
-    role: 'Evening Couture',
-    commentEn: 'Exceptional hospitality during our private VIP fitting. DW Boutique brings Paris-level couture to the heart of Buraydah.',
-    commentAr: 'استقبال راقي وتجربة قياس خاصة مريحة جداً. تصاميم فاخرة وتطريز متقن على أعلى مستوى.',
-    rating: 4.5,
+    author: 'Mazon (مزن)',
+    role: 'Couture Client',
+    commentEn: 'DW Boutique is truly exceptional—impeccable craftsmanship and precise timing. Thank you to designer Arwa and coordinator Rahaf for their wonderful hospitality.',
+    commentAr: 'بوتيك دي دبليو جداً رائع، احترافية في التنفيذ ودقة تامة في المواعيد. شكراً للمصممة أروى ولموظفة الاستقبال رهف على أسلوبها الراقي وحسن تعاملها.',
+    rating: 5,
   },
   {
-    author: 'Maha Al-Qassim',
-    role: 'Bespoke Order',
-    commentEn: 'The architectural shoulders and hand-embellished crystal finish made for the most memorable look of the evening.',
-    commentAr: 'التطريز اليدوي وقصّة الأكتاف المعمارية ميزت الفستان في المناسبة بالكامل.',
-    rating: 4.5,
+    author: 'Asma Alharbi (أسماء الحربي)',
+    role: 'Evening Gown Client',
+    commentEn: 'Coordinator Rahaf was extremely gracious and patient with alterations, and designer Arwa has gifted hands—she crafted the gown exactly as I envisioned and even better.',
+    commentAr: 'ما شاء الله تبارك الله، الموظفة رهف قمة في الأخلاق والتعامل والصبر مع الزبائن، والمصممة أروى يدها تُلف بحرير، أخرجت لي الفستان مثل ما أردت وأكثر.',
+    rating: 5,
   },
 ];
 
-function StarRating({ rating = 4.5 }: { rating?: number }) {
+function StarRating({ rating = 5 }: { rating?: number }) {
+  if (rating === 4.5) {
+    return (
+      <div className="inline-flex items-center gap-1 text-[#C5A880]">
+        {[...Array(4)].map((_, i) => (
+          <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        ))}
+        <svg className="w-4 h-4" viewBox="0 0 20 20">
+          <defs>
+            <linearGradient id="halfStarGrad">
+              <stop offset="50%" stopColor="#C5A880" />
+              <stop offset="50%" stopColor="#E5E5E5" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#halfStarGrad)"
+            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+          />
+        </svg>
+      </div>
+    );
+  }
+
   return (
     <div className="inline-flex items-center gap-1 text-[#C5A880]">
-      {[...Array(4)].map((_, i) => (
+      {[...Array(5)].map((_, i) => (
         <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
       ))}
-      <svg className="w-4 h-4" viewBox="0 0 20 20">
-        <defs>
-          <linearGradient id="halfStarGrad">
-            <stop offset="50%" stopColor="#C5A880" />
-            <stop offset="50%" stopColor="#E5E5E5" />
-          </linearGradient>
-        </defs>
-        <path
-          fill="url(#halfStarGrad)"
-          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-        />
-      </svg>
     </div>
   );
 }
@@ -125,7 +137,7 @@ export default function AtelierAndReviewsSection({ onOpenBooking }: Props) {
     <section className="bg-[#FAF9F7] text-[#1A1A1A] pt-20 pb-16 px-4 sm:px-8 md:px-16 border-t border-neutral-200">
       <div className="max-w-7xl mx-auto space-y-24">
 
-        {/* ── CLIENT REVIEWS (4.5 STAR VERIFIED RATING) ── */}
+        {/* ── CLIENT REVIEWS (4.5 STAR OVERALL RATING) ── */}
         <div>
           <div className="text-center max-w-xl mx-auto mb-14">
             <span className="text-[10px] uppercase tracking-[0.35em] text-[#8C7A6B] font-medium">
